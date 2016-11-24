@@ -73,6 +73,7 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	if function == "init" {													//initialize the chaincode state, used as reset
 		return t.Init(stub, "init", args)
 	} else if function == "insert" {
+		fmt.Println("run the insert")
 		if len(args) < 3 {
 			return nil, errors.New("insert failed. Must include 3 column values")
 		}
@@ -97,12 +98,11 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		if !ok {
 			return nil, errors.New("table operation failed. Row with given key already exists")
 		}
-
-
+		return nil, nil 
+	} else {
+		fmt.Println("invoke did not find func: " + function)
+		return nil, errors.New("Received unknown function query: " + function)
 	}
-	fmt.Println("invoke did not find func: " + function)					//error
-
-	return nil, errors.New("Received unknown function invocation: " + function)
 }
 
 // Query is our entry point for queries  
@@ -146,8 +146,10 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 		}
 
 		return jsonRows, nil
-	}
-	fmt.Println("query did not find func: " + function)	
+	} else {
 
-	return nil, errors.New("Received unknown function query: " + function)
+		fmt.Println("query did not find func: " + function)	
+		return nil, errors.New("Received unknown function query: " + function)
+	}
+
 }
