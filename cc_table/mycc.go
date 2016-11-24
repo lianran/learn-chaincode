@@ -112,40 +112,21 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	// Handle different functions
 	if function == "getbyid" {
 		if len(args) < 1 {
-			return nil, errors.New("get failed. Must have the key values")
+			return nil, errors.New("getRowTableOne failed. Must include 1 key value")
 		}
-		var columns []shim.Column
 
 		col1Val := args[0]
-		col1 := shim.Column{Value: & shim.Column_String_{String_: col1Val}}
+		var columns []shim.Column
+		col1 := shim.Column{Value: &shim.Column_String_{String_: col1Val}}
 		columns = append(columns, col1)
 
-		rowChannel, err := stub.GetRows("table", columns)
+		row, err := stub.GetRow("table", columns)
 		if err != nil {
-			return nil, fmt.Errorf("get operation failed. %s", err)
+			return nil, fmt.Errorf("getbyid operation failed. %s", err)
 		}
 
-		var rows []shim.Row
-		for {
-			select {
-			case row, ok := <-rowChannel:
-				if !ok {
-					rowChannel = nil
-				} else {
-					rows = append(rows, row)
-				}
-			}
-			if rowChannel == nil {
-				break
-			}
-		}
-
-		jsonRows, err := json.Marshal(rows)
-		if err != nil {
-			return nil, fmt.Errorf("get operation failed. Error marshaling JSON: %s", err)
-		}
-
-		return jsonRows, nil
+		rowString := fmt.Sprintf("%s", row)
+		return []byte(rowString), nil
 	} else {
 
 		fmt.Println("query did not find func: " + function)	
