@@ -20,7 +20,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -91,12 +90,12 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		columns = append(columns, &col3)
 
 		row := shim.Row{Columns: columns}
-		ok, err := stub.InsertRow("tableOne", row)
+		ok, err := stub.InsertRow("table", row)
 		if err != nil {
-			return nil, fmt.Errorf("insertTableOne operation failed. %s", err)
+			return nil, fmt.Errorf("table operation failed. %s", err)
 		}
 		if !ok {
-			return nil, errors.New("insertTableOne operation failed. Row with given key already exists")
+			return nil, errors.New("table operation failed. Row with given key already exists")
 		}
 
 
@@ -143,7 +142,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 		jsonRows, err := json.Marshal(rows)
 		if err != nil {
-			return nil, fmt.Errorf("getRowsTableFour operation failed. Error marshaling JSON: %s", err)
+			return nil, fmt.Errorf("get operation failed. Error marshaling JSON: %s", err)
 		}
 
 		return jsonRows, nil
