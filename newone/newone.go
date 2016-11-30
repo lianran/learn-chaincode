@@ -121,7 +121,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		//ToDo: some check for the owner?
 		// the follow is just a example
 		if _owner != owner {
-			return []byte("don't have the right to transfer the bill"), nil
+			return []byte("don't have the right to transfer the bill"), errors.New("don't have the right to transfer")
 			//return nil, errors.New("don't have the right to transfer")
 		}
 
