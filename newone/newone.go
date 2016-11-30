@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"strings"
 	"time"
+	"strconv"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -82,12 +83,12 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		}
 		//store the from and to 
 		key = fromid + sp + timestamp + sp + uuid
-		err = stub.PutState(key, []type(timestamp))
+		err = stub.PutState(key, []byte(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for fromid : %s", err)
 		}
 		key = toid + sp + timestamp + sp + uuid
-		err = stub.PutState(key, []type(timestamp))
+		err = stub.PutState(key, []byte(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for toid : %s", err)
 		}
@@ -121,7 +122,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		timestamp := strconv.FormatInt(ts, 10) 
 
 		if _owner != owner {
-			return nil, errors.New("The %s don't have the right to transfer", _owner)
+			return nil, errors.New("don't have the right to transfer")
 		}
 		history = history + "," + toid
 		owner = toid
@@ -157,10 +158,10 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		owner := args[0]
 		time := 3600
 		if len(args) >= 2{
-			time = args[1]
+			time = strconv.Atoi(args[1])
 		}
 		// Todo:rangequery?
-		return "todo", nil
+		return []byte("todo"), nil
 	case "getnumsofbills":
 		if len(args) < 1{
 			return nil, errors.New("getnumsofbills operation must include at last one argument, owner(and time s)")
@@ -168,10 +169,10 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		owner := args[0]
 		time := 3600
 		if len(args) >= 2{
-			time = args[1]
+			time = strconv.Atoi(args[1])
 		}
 		// Todo:rangequery?
-		return "todo", nil
+		return []byte("todo"), nil
 	case "getbill":
 		if len(args) < 2{
 			return nil, errors.New("getbill operation must include at last two arguments, uuid and owner")
@@ -184,6 +185,6 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
 		}
-		return value
+		return value, nil
 	}
 }
