@@ -11,7 +11,7 @@ invoke:
 query:
 	1. 查询自己的，指定时间(myhistory)
 		[owner，time(s)]
-	2. 查询数量(getnumsofbills)
+	2. 查询数量(getnumofbills)
 		[ID, time]
 	3. 查询发票的信息(getbill)
 		[uuid, owner]

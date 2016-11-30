@@ -68,6 +68,8 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		owner := fromid
 
 		//TODO: need some check for fromid ?
+
+
 		//get the timestamp
 		ts := time.Now().Unix() 
 		timestamp := strconv.FormatInt(ts, 10) 
@@ -115,15 +117,18 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		history := listValue[2]
 		metadata := listValue[3]
 		owner := listValue[4]
+		
 		//ToDo: some check for the owner?
+		// the follow is just a example
+		if _owner != owner {
+			return []byte("don't have the right to transfer the bill"), nil
+			//return nil, errors.New("don't have the right to transfer")
+		}
 
 		//get the timestamp
 		ts := time.Now().Unix() 
 		timestamp := strconv.FormatInt(ts, 10) 
 
-		if _owner != owner {
-			return nil, errors.New("don't have the right to transfer")
-		}
 		history = history + "," + toid
 		owner = toid
 		newvalue := fromid + sp + toid + sp + history + sp + metadata + sp + owner
@@ -163,18 +168,41 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		*/
 		// Todo:rangequery?
 		return []byte("todo"), nil
-	case "getnumsofbills":
+	case "getnumofbills":
 		if len(args) < 1{
 			return nil, errors.New("getnumsofbills operation must include at last one argument, owner(and time s)")
 		}
-		/*#owner := args[0]
+		owner := args[0]
+		//Todo: some check for the owner?
+
+		//get the timestamp
+		ts := time.Now().Unix() 
+		//timestamp := strconv.FormatInt(ts, 10)
+
 		time := 3600
 		if len(args) >= 2{
 			time, err := strconv.Atoi(args[1])
 		}
-		*/
-		// Todo:rangequery?
-		return []byte("todo"), nil
+		starttime := strconv.FormatInt(ts-time, 10)
+		endtime := strconv.FormatInt(ts,10)
+
+		keysIter, err := stub.RangeQueryState(owner + startime, owner + endtime)
+		if err != nil {
+			return nil, fmt.Errorf("getnumofbills failed. Error accessing state: %s", err)
+		}
+		defer keysIter.Close()
+
+		cnt := 0
+
+		for keysIter.HasNext() {
+			key, _, iterErr := keysIter.Next()
+			if iterErr != nil {
+				return nil, fmt.Errorf("getnumofbills operation failed. Error accessing state: %s", err)
+			}
+			cnt = cnt + 1
+		}
+		return []byte(strconv.Itoa(cnt)), nil
+
 	case "getbill":
 		if len(args) < 2{
 			return nil, errors.New("getbill operation must include at last two arguments, uuid and owner")
