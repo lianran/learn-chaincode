@@ -102,7 +102,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		key := args[0]
 		uuid := key
 		_owner := args[1]
-		_toid := args[2]
+		//#_toid := args[2]
 
 		//get the  info of uuid
 		value, err := stub.GetState(key)
@@ -155,22 +155,24 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		if len(args) < 1{
 			return nil, errors.New("myhistory operation must include at last one argument, owner(and time s)")
 		}
-		owner := args[0]
+		/*#owner := args[0]
 		time := 3600
 		if len(args) >= 2{
 			time, err := strconv.Atoi(args[1])
 		}
+		*/
 		// Todo:rangequery?
 		return []byte("todo"), nil
 	case "getnumsofbills":
 		if len(args) < 1{
 			return nil, errors.New("getnumsofbills operation must include at last one argument, owner(and time s)")
 		}
-		owner := args[0]
+		/*#owner := args[0]
 		time := 3600
 		if len(args) >= 2{
 			time, err := strconv.Atoi(args[1])
 		}
+		*/
 		// Todo:rangequery?
 		return []byte("todo"), nil
 	case "getbill":
@@ -178,8 +180,9 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 			return nil, errors.New("getbill operation must include at last two arguments, uuid and owner")
 		}
 		uuid := args[0]
-		owner := args[1]
+		//#owner := args[1]
 
+		//ToDo: some checks?
 		key := uuid
 		value, err := stub.GetState(key)
 		if err != nil {
