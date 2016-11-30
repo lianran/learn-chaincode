@@ -22,7 +22,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hyperledger/fabric/core/ /shim"
+	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
 // myChaincode 
@@ -67,7 +67,9 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		owner := fromid
 
 		//TODO: need some check for fromid ?
-		timestamp := time.Now().Unix()  
+		//get the timestamp
+		ts := time.Now().Unix() 
+		timestamp := strconv.FormatInt(ts, 10) 
 
 		key := uuid
 		value := fromid + sp + toid + sp + history + sp + metadata + sp + owner
@@ -80,12 +82,12 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		}
 		//store the from and to 
 		key = fromid + sp + timestamp + sp + uuid
-		err = stub.PutState(key, "nothing")
+		err = stub.PutState(key, []type(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for fromid : %s", err)
 		}
 		key = toid + sp + timestamp + sp + uuid
-		err = stub.PutState(key, "nothing")
+		err = stub.PutState(key, []type(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for toid : %s", err)
 		}
@@ -103,29 +105,37 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 
 		//get the  info of uuid
 		value, err := stub.GetState(key)
-		listValue := strings.Split(value, sp)
+		if err != nil {
+			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+		}
+		listValue := strings.Split(string(value), sp)
 		fromid := listValue[0]
 		toid := listValue[1]
 		history := listValue[2]
 		metadata := listValue[3]
 		owner := listValue[4]
 		//ToDo: some check for the owner?
+
+		//get the timestamp
+		ts := time.Now().Unix() 
+		timestamp := strconv.FormatInt(ts, 10) 
+
 		if _owner != owner {
 			return nil, errors.New("The %s don't have the right to transfer", _owner)
 		}
-		history = history + ',' + toid
+		history = history + "," + toid
 		owner = toid
 		newvalue := fromid + sp + toid + sp + history + sp + metadata + sp + owner
 		fmt.Printf("the old value is: %s", value)
 		fmt.Printf("the new value is: %s", newvalue)
-		err := stub.PutState(key, []byte(newvalue))
+		err = stub.PutState(key, []byte(newvalue))
 		if err != nil {
 			fmt.Printf("Error putting state %s", err)
 			return nil, fmt.Errorf("transfer operation failed. Error updating state: %s", err)
 		}
 		//ToDo: some check for the state of puting 
 		key = owner + sp + uuid
-		err = stub.PutState(key, "nothing")
+		err = stub.PutState(key, []byte(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for owner : %s", err)
 		}
