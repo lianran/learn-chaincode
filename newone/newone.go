@@ -158,7 +158,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		owner := args[0]
 		time := 3600
 		if len(args) >= 2{
-			time = strconv.Atoi(args[1])
+			time, err := strconv.Atoi(args[1])
 		}
 		// Todo:rangequery?
 		return []byte("todo"), nil
@@ -169,7 +169,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		owner := args[0]
 		time := 3600
 		if len(args) >= 2{
-			time = strconv.Atoi(args[1])
+			time, err := strconv.Atoi(args[1])
 		}
 		// Todo:rangequery?
 		return []byte("todo"), nil
@@ -186,5 +186,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
 		}
 		return value, nil
+	default:
+		return nil, errors.New("Unsupported operation")
 	}
 }
