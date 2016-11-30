@@ -1,0 +1,85 @@
+
+init:
+  {
+    "jsonrpc": "2.0",
+    "method": "deploy",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["init", "a"]
+      }
+    },
+    "id": 1
+  }
+
+
+create:
+  需要传入至少3个参数：uuid,开发票方，收发票方,(metadata)
+  {
+    "jsonrpc": "2.0",
+    "method": "invoke",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["create","00001","JD","PKU","metadata"]
+      }
+    },
+    "id": 1
+  }
+
+transfer:
+  需要传入3个参数：uuid，持有者id和接受方id
+  {
+    "jsonrpc": "2.0",
+    "method": "invoke",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["transfer","00001","JD","xiaoan"]
+      }
+    },
+    "id": 1
+  }
+
+getbill:
+  需要传入连个参数，uuid和拥有者id（非拥有者无权查看bill）
+  {
+    "jsonrpc": "2.0",
+    "method": "query",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["getbill","00001","xiaoan"]
+      }
+    },
+    "id": 1
+  }
+getnumofbills:
+  需要传入至少一个参数，账户和时间（非必须）
+  {
+     "jsonrpc": "2.0",
+    "method": "query",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["getnumofbills","JD"]
+      }
+    },
+    "id": 1
+  }
+
