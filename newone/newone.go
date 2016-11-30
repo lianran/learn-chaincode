@@ -104,7 +104,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		key := args[0]
 		uuid := key
 		_owner := args[1]
-		//#_toid := args[2]
+		_toid := args[2]
 
 		//get the  info of uuid
 		value, err := stub.GetState(key)
@@ -129,8 +129,8 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		ts := time.Now().Unix() 
 		timestamp := strconv.FormatInt(ts, 10) 
 
-		history = history + "," + toid
-		owner = toid
+		history = history + "," + _toid
+		owner = _toid
 		newvalue := fromid + sp + toid + sp + history + sp + metadata + sp + owner
 		fmt.Printf("the old value is: %s", value)
 		fmt.Printf("the new value is: %s", newvalue)
@@ -181,13 +181,12 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 
 		tm := int64(3600)
 		if len(args) >= 2{
-			tm, _ := strconv.ParseInt(args[1], 10, 64)
+			tm, _ = strconv.ParseInt(args[1], 10, 64)
 		}
-		_ = tm
 		starttime := strconv.FormatInt(ts-tm, 10)
 		endtime := strconv.FormatInt(ts,10)
 
-		keysIter, err := stub.RangeQueryState(owner + starttime, owner + endtime)
+		keysIter, err := stub.RangeQueryState(owner + sp + starttime, owner + sp + endtime)
 		if err != nil {
 			return nil, fmt.Errorf("getnumofbills failed. Error accessing state: %s", err)
 		}
@@ -202,18 +201,24 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 			}
 			cnt = cnt + 1
 		}
-		return []byte(strconv.Itoa(cnt)), nil
+		return []byte("the number is :" + strconv.Itoa(cnt)), nil
 
 	case "getbill":
 		if len(args) < 2{
 			return nil, errors.New("getbill operation must include at last two arguments, uuid and owner")
 		}
 		uuid := args[0]
-		//#owner := args[1]
+		_owner := args[1]
 
 		//ToDo: some checks?
 		key := uuid
 		value, err := stub.GetState(key)
+		listValue := strings.Split(string(value), sp)
+		// check the ownership
+		owner := listValue[4]
+		if _owner != owner {
+			return []byte("you don't have the right to get this bill"), nil
+		}
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
 		}
