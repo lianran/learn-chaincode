@@ -179,14 +179,15 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		ts := time.Now().Unix() 
 		//timestamp := strconv.FormatInt(ts, 10)
 
-		time := 3600
+		tm := int64(3600)
 		if len(args) >= 2{
-			time, err := strconv.Atoi(args[1])
+			tm, _ := strconv.ParseInt(args[1], 10, 64)
 		}
-		starttime := strconv.FormatInt(ts-time, 10)
+		_ = tm
+		starttime := strconv.FormatInt(ts-tm, 10)
 		endtime := strconv.FormatInt(ts,10)
 
-		keysIter, err := stub.RangeQueryState(owner + startime, owner + endtime)
+		keysIter, err := stub.RangeQueryState(owner + starttime, owner + endtime)
 		if err != nil {
 			return nil, fmt.Errorf("getnumofbills failed. Error accessing state: %s", err)
 		}
@@ -195,7 +196,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		cnt := 0
 
 		for keysIter.HasNext() {
-			key, _, iterErr := keysIter.Next()
+			_, _, iterErr := keysIter.Next()
 			if iterErr != nil {
 				return nil, fmt.Errorf("getnumofbills operation failed. Error accessing state: %s", err)
 			}
