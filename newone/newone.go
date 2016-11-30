@@ -67,7 +67,10 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		history := fromid
 		owner := fromid
 
-		//TODO: need some check for fromid ?
+		//TODO: need some check for fromid and data
+		if fromid == toid {
+			return nil, errors.New("create operation failed, fromid is same with toid")
+		}
 
 
 		//get the timestamp
@@ -106,6 +109,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		_owner := args[1]
 		_toid := args[2]
 
+
 		//get the  info of uuid
 		value, err := stub.GetState(key)
 		if err != nil {
@@ -119,10 +123,14 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		owner := listValue[4]
 		
 		//ToDo: some check for the owner?
-		// the follow is just a example
+		// if the person don't own it, he can transfer this bill
 		if _owner != owner {
 			return []byte("don't have the right to transfer the bill"), errors.New("don't have the right to transfer")
 			//return nil, errors.New("don't have the right to transfer")
+		}
+		//if the owner is toid, it cann't be transfer any more
+		if owner == toid {
+			return []byte("cann't transfer bill now"), errors.New("cann't transfer this bill now") 
 		}
 
 		//get the timestamp
