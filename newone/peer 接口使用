@@ -1,3 +1,6 @@
+deploy:
+peer chaincode deploy -p mycc -c '{"Args": ["init","a"]}'
+
 invoke：
 创建发票
 	peer chaincode invoke -n mycc -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"metadata\"]}"  

@@ -7,8 +7,9 @@
 			2. 将以上数据以（uuid, fromid + toid + history + metadata + owner）的形式存储，并存储(fromid+timestamp+uuid, timestamp)以及（fromid + timestamp + uuid, timestamp）
 			3. 可能需要做一些必要的检查
 				a. fromid != toid
+				b. 可能需要在创建发票的时候检查发票是否已经存在
 		ToDo:
-			可能需要在创建发票的时候检查发票是否已经存在？
+			
 	2. transfer:
 		Done:
 			1. 传入三个参数：uuid、ownerid和toid
@@ -39,3 +40,16 @@
 			2. 返回发票信息
 			3. 可能需要的做的一些必要的检查
 				a. 是否有权查看此发票
+				b. 加入发票是否存在的提示
+		ToDo:
+
+
+ATTENTION：
+	1. 不同peer上时间不一样，将会导致timestamp的不一致，从而不能得到相同状态？！
+		a. 使用example中的时间获取方式：
+			ts, err2 := stub.GetTxTimestamp()
+			if err2 != nil {
+				fmt.Printf("Error getting transaction timestamp: %s", err2)
+			}
+			该方法不行，由于....
+		b. 传入？

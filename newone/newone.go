@@ -18,9 +18,9 @@ package main
 
 import (
 	"errors"
+	"time"
 	"fmt"
 	"strings"
-	"time"
 	"strconv"
 	"encoding/json"
 
@@ -69,10 +69,18 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		owner := fromid
 
 		//TODO: need some check for fromid and data
+		//check fromid and toid
 		if fromid == toid {
 			return nil, errors.New("create operation failed, fromid is same with toid")
 		}
-
+		//check for existence of the bill
+		oldvalue, err := stub.GetState(uuid)
+		if err != nil {
+			return nil, fmt.Errorf("create operation failed. Error accessing state(check the existence of bill): %s", err)
+		}
+		if oldvalue != nil {
+			return nil, fmt.Errorf("existed bill!")
+		}
 
 		//get the timestamp
 		ts := time.Now().Unix() 
@@ -82,7 +90,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		value := fromid + sp + toid + sp + history + sp + metadata + sp + owner
 		fmt.Printf("value is %s", value)
 
-		err := stub.PutState(key, []byte(value))
+		err = stub.PutState(key, []byte(value))
 		if err != nil {
 			fmt.Printf("Error putting state %s", err)
 			return nil, fmt.Errorf("create operation failed. Error updating state: %s", err)
@@ -115,6 +123,9 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		value, err := stub.GetState(key)
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+		}
+		if value == nil {
+			return nil, fmt.Errorf("this bill does not exist")
 		}
 		listValue := strings.Split(string(value), sp)
 		fromid := listValue[0]
@@ -228,7 +239,6 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 
 		//get the timestamp
 		ts := time.Now().Unix() 
-		//timestamp := strconv.FormatInt(ts, 10)
 
 		tm := int64(3600)
 		if len(args) >= 2{
@@ -243,7 +253,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		}
 		defer keysIter.Close()
 
-		cnt := 0
+		cnt := int64(0)
 
 		for keysIter.HasNext() {
 			_, _, iterErr := keysIter.Next()
@@ -252,7 +262,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 			}
 			cnt = cnt + 1
 		}
-		return []byte("the number is :" + strconv.Itoa(cnt)), nil
+		return []byte(strconv.FormatInt(cnt,10)), nil
 
 	case "getbill":
 		if len(args) < 2{
@@ -266,6 +276,9 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		value, err := stub.GetState(key)
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+		}
+		if value == nil {
+			return []byte("don't have this bill"), nil
 		}
 		listValue := strings.Split(string(value), sp)
 		// check the ownership
