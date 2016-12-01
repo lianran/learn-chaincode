@@ -1,6 +1,6 @@
 账户：？
 	调用它的接口
-time: unix ts
+time: unix timestamp
 invoke:
 	1. 开发票（create）：
 	[uuid,from,to，metadata,]owner,history
