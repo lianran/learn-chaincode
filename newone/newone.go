@@ -22,6 +22,7 @@ import (
 	"strings"
 	"time"
 	"strconv"
+	"encoding/json"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
@@ -168,14 +169,50 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		if len(args) < 1{
 			return nil, errors.New("myhistory operation must include at last one argument, owner(and time s)")
 		}
-		/*#owner := args[0]
-		time := 3600
+		owner := args[0]
+		//Todo: some check for the owner?
+
+		//get the timestamp
+		ts := time.Now().Unix() 
+		//timestamp := strconv.FormatInt(ts, 10)
+
+		tm := int64(3600)
 		if len(args) >= 2{
-			time, err := strconv.Atoi(args[1])
+			tm, _ = strconv.ParseInt(args[1], 10, 64)
 		}
-		*/
-		// Todo:rangequery?
-		return []byte("todo"), nil
+		starttime := strconv.FormatInt(ts-tm, 10)
+		endtime := strconv.FormatInt(ts,10)
+
+		//check is a user or a business
+		bus := true
+		keysIter, err := stub.RangeQueryState("just find nothin", "just find nothin")
+		if bus {
+			keysIter, err = stub.RangeQueryState(owner + sp + starttime, owner + sp + endtime)
+		} else {
+			keysIter, err = stub.RangeQueryState(owner + sp, owner + sp)
+		}
+
+		
+		if err != nil {
+			return nil, fmt.Errorf("getnumofbills failed. Error accessing state: %s", err)
+		}
+		defer keysIter.Close()
+
+		var keys []string
+		for keysIter.HasNext() {
+			key, _, iterErr := keysIter.Next()
+			if iterErr != nil {
+				return nil, fmt.Errorf("getnumofbills operation failed. Error accessing state: %s", err)
+			}
+			keys = append(keys, key)
+		}
+		
+		jsonKeys, err := json.Marshal(keys)
+		if err != nil {
+			return nil, fmt.Errorf("keys operation failed. Error marshaling JSON: %s", err)
+		}
+
+		return jsonKeys, nil
 	case "getnumofbills":
 		if len(args) < 1{
 			return nil, errors.New("getnumsofbills operation must include at last one argument, owner(and time s)")
@@ -221,14 +258,16 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		//ToDo: some checks?
 		key := uuid
 		value, err := stub.GetState(key)
-		listValue := strings.Split(string(value), sp)
-		// check the ownership
-		owner := listValue[4]
-		if _owner != owner {
-			return []byte("you don't have the right to get this bill"), nil
-		}
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+		}
+		listValue := strings.Split(string(value), sp)
+		// check the ownership
+		fromid := listValue[0]
+		toid := listValue[1]
+		owner := listValue[4]
+		if _owner != owner && _owner != fromid && _owner != toid{
+			return []byte("you don't have the right to get this bill"), nil
 		}
 		return value, nil
 	default:

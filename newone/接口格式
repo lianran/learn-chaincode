@@ -83,3 +83,19 @@ getnumofbills:
     "id": 1
   }
 
+myhistory:
+  需要至少传入一个参数，账户和时间（非必须）
+  {
+    "jsonrpc": "2.0",
+    "method": "query",
+    "params": {
+      "type": 1,
+      "chaincodeID":{
+          "name": "mycc"
+      },
+      "ctorMsg": {
+          "args":["myhistory","JD"]
+      }
+    },
+    "id": 1
+  }
