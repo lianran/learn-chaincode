@@ -1,0 +1,41 @@
+一. init
+	doing nothing (也许可以添加一下限制之内的东西在此处)
+二. invoke
+	1. create:
+		Done:
+			1. 传入至少3个参数:uuid、fromid和toid，其中metadata是可选内容。
+			2. 将以上数据以（uuid, fromid + toid + history + metadata + owner）的形式存储，并存储(fromid+timestamp+uuid, timestamp)以及（fromid + timestamp + uuid, timestamp）
+			3. 可能需要做一些必要的检查
+				a. fromid != toid
+		ToDo:
+			?
+	2. transfer:
+		Done:
+			1. 传入三个参数：uuid、ownerid和toid
+			2. 更改（uuid,）数据，其中包含value中的history和owner，并存储新的键值对（ownerid + timestamp, timestamp）
+			3. 可能需要做的一些必要的检查
+				a. 是否为发票持有者进行转移 ownerid == owner(读出来的)
+				b. 是否何以流转 owner != toid
+		ToDo:
+			?
+三. query
+	1. myhistory：
+		现在仅可用于查询商家
+		Done:
+			1. 传入至少2个参数：id，flag, time; 其中flag 为1表示商家，否者为普通用户，时间为可选内容，如果不传入则为3600s(即一个小时)
+			2. 返回keys，其中包含了uuid
+		ToDo：
+			区分一下用户为商家还是个人用户？由于其查询的key不一样
+	2. getnumofbills:
+		提供给商家使用，用于快速查询自己发票数量，也可通过myhistory来查询
+		Done:
+			1. 传入至少1个参数：id, time;其中时间为可选内容，如果不传入则为3600s(即一个小时)
+			2. 返回发票数量
+		ToDo：
+			是否不需要这个接口各，可以使用myhistory完成，但是可能myhistory返回数据量可能会比较大
+	3. getbill:
+		Done:
+			1. 传入至少2个参数：uuid和ownerid（或者fromid、toid）
+			2. 返回发票信息
+			3. 可能需要的做的一些必要的检查
+				a. 是否有权查看此发票

@@ -166,10 +166,11 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 	switch function {
 
 	case "myhistory":
-		if len(args) < 1{
-			return nil, errors.New("myhistory operation must include at last one argument, owner(and time s)")
+		if len(args) < 2{
+			return nil, errors.New("myhistory operation must include at last two arguments, owner, flag(and time s)")
 		}
 		owner := args[0]
+		business := args[1]
 		//Todo: some check for the owner?
 
 		//get the timestamp
@@ -177,19 +178,24 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		//timestamp := strconv.FormatInt(ts, 10)
 
 		tm := int64(3600)
-		if len(args) >= 2{
-			tm, _ = strconv.ParseInt(args[1], 10, 64)
+		if len(args) >= 3{
+			tm, _ = strconv.ParseInt(args[2], 10, 64)
 		}
 		starttime := strconv.FormatInt(ts-tm, 10)
 		endtime := strconv.FormatInt(ts,10)
 
 		//check is a user or a business
 		bus := true
+		fmt.Printf("flag is %s", business)
+		if business != "1"{
+			bus = false
+		}
+		fmt.Println(bus)
 		keysIter, err := stub.RangeQueryState("just find nothin", "just find nothin")
 		if bus {
 			keysIter, err = stub.RangeQueryState(owner + sp + starttime, owner + sp + endtime)
 		} else {
-			keysIter, err = stub.RangeQueryState(owner + sp, owner + sp)
+			keysIter, err = stub.RangeQueryState(owner + sp + "0", owner + sp + "Z")
 		}
 
 		
