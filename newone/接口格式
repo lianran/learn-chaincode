@@ -84,7 +84,7 @@ getnumofbills:
   }
 
 myhistory:
-  需要至少传入一个参数，账户和时间（非必须）
+  需要至少传入两个个参数，账户、flag （1表示商家，或则为普通用户）和时间（非必须）
   {
     "jsonrpc": "2.0",
     "method": "query",
@@ -94,7 +94,7 @@ myhistory:
           "name": "mycc"
       },
       "ctorMsg": {
-          "args":["myhistory","JD"]
+          "args":["myhistory","JD","1"]
       }
     },
     "id": 1
