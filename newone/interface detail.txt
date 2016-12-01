@@ -8,7 +8,7 @@
 			3. 可能需要做一些必要的检查
 				a. fromid != toid
 		ToDo:
-			?
+			可能需要在创建发票的时候检查发票是否已经存在？
 	2. transfer:
 		Done:
 			1. 传入三个参数：uuid、ownerid和toid

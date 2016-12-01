@@ -1,0 +1,13 @@
+invoke：
+创建发票
+	peer chaincode invoke -n mycc -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"metadata\"]}"  
+转移发票
+	peer chaincode invoke -n mycc -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\"]}" 
+
+query:
+查询商家发票记录：
+	peer chaincode query -n mycc -c "{\"Args\": [\"myhistory\", \"JD\",\"1\"]}"
+查询用户发票记录：
+	peer chaincode query -n mycc -c "{\"Args\": [\"myhistory\", \"xiaoan\",\"2\"]}"
+查询发票详细信息：
+	peer chaincode query -n mycc -c "{\"Args\": [\"getbill\", \"00001\",\"xiaoan\"]}"
