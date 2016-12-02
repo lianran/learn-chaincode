@@ -1,0 +1,27 @@
+version: '2'
+services:
+  baseimage:
+    build: ./baseimage
+    image: hyperledger/fabric-baseimage:latest
+
+  membersrvc:
+    image: ibmblockchain/fabric-membersrvc:${ARCH_TAG}
+    extends:
+      file: base/membersrvc.yaml
+      service: membersrvc
+
+  vp0:
+    image: ibmblockchain/fabric-peer:${ARCH_TAG}
+    extends:
+      file: base/peer-secure-pbft-base.yaml
+      service: peer-secure-pbft-base
+    ports:
+      - "7050:7050"
+      - "7051:7051"
+      - "7053:7053"
+    environment:
+      - CORE_PEER_ID=vp0
+      - CORE_SECURITY_ENROLLID=test_vp0
+      - CORE_SECURITY_ENROLLSECRET=MwYpmSRjupbT
+    links:
+      - membersrvc
