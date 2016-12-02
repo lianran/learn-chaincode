@@ -189,8 +189,12 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		//timestamp := strconv.FormatInt(ts, 10)
 
 		tm := int64(3600)
+		var err error
 		if len(args) >= 3{
-			tm, _ = strconv.ParseInt(args[2], 10, 64)
+			tm, err = strconv.ParseInt(args[2], 10, 64)
+		}
+		if err != nil {
+			return nil, fmt.Errorf("getnumofbills failed. Bad format of the time: %s", err)
 		}
 		starttime := strconv.FormatInt(ts-tm, 10)
 		endtime := strconv.FormatInt(ts,10)
@@ -241,8 +245,12 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		ts := time.Now().Unix() 
 
 		tm := int64(3600)
+		var err error
 		if len(args) >= 2{
-			tm, _ = strconv.ParseInt(args[1], 10, 64)
+			tm, err = strconv.ParseInt(args[1], 10, 64)
+		}
+		if err != nil {
+			return nil, fmt.Errorf("getnumofbills failed. Bad format of the time: %s", err)
 		}
 		starttime := strconv.FormatInt(ts-tm, 10)
 		endtime := strconv.FormatInt(ts,10)
