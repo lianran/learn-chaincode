@@ -57,14 +57,15 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 	switch function {
 
 	case "create":
-		if len(args) < 3{
-			return nil, errors.New("create operation must include at last there arguments, a uuid , a from and a to")
+		if len(args) < 4{
+			return nil, errors.New("create operation must include at last four arguments, a uuid , a from , a to and timestamp")
 		}
 		// get the args
 		uuid := args[0]
 		fromid := args[1]
 		toid := args[2]
-		metadata := args[3]
+		timestamp := args[3]
+		metadata := args[4]
 		history := fromid
 		owner := fromid
 
@@ -73,6 +74,17 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		if fromid == toid {
 			return nil, errors.New("create operation failed, fromid is same with toid")
 		}
+		//do some check for the timestamp
+		ts := time.Now().Unix() 
+		tm, err := strconv.ParseInt(timestamp, 10, 64) 
+		if err != nil {
+			return nil, fmt.Errorf("bad format of the timestamp")
+		}
+		if tm - ts > 3600 || ts - tm > 3600 {
+			return nil, fmt.Errorf("the timestamp is bad one !")
+		}
+
+		
 		//check for existence of the bill
 		oldvalue, err := stub.GetState(uuid)
 		if err != nil {
@@ -80,11 +92,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		}
 		if oldvalue != nil {
 			return nil, fmt.Errorf("existed bill!")
-		}
-
-		//get the timestamp
-		ts := time.Now().Unix() 
-		timestamp := strconv.FormatInt(ts, 10) 
+		} 
 
 		key := uuid
 		value := fromid + sp + toid + sp + history + sp + metadata + sp + owner
@@ -109,14 +117,15 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		return nil,nil
 
 	case "transfer":
-		if len(args) < 3{
-			return nil, errors.New("transfer operation must include at last there arguments, a uuid , a owner and a toid")
+		if len(args) < 4{
+			return nil, errors.New("transfer operation must include at last there arguments, a uuid , a owner , a toid and timestamp")
 		}
 		//get the args
 		key := args[0]
 		uuid := key
 		_owner := args[1]
 		_toid := args[2]
+		timestamp := args[3]
 
 
 		//get the  info of uuid
@@ -145,9 +154,15 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 			return []byte("cann't transfer bill now"), errors.New("cann't transfer this bill now") 
 		}
 
-		//get the timestamp
+		//do some check for the timestamp
 		ts := time.Now().Unix() 
-		timestamp := strconv.FormatInt(ts, 10) 
+		tm, err := strconv.ParseInt(timestamp, 10, 64) 
+		if err != nil {
+			return nil, fmt.Errorf("bad format of the timestamp")
+		}
+		if tm - ts > 3600 || ts - tm > 3600 {
+			return nil, fmt.Errorf("the timestamp is bad one !")
+		}
 
 		history = history + "," + _toid
 		owner = _toid

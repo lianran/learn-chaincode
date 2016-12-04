@@ -12,7 +12,7 @@ CC_ID="mycc"
 for ((i=0; i < $round; i++)); do
     echo "round $i"
     for ((j=0; j < $num; j++)); do
-        peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"transfer\", \"${key}${i}${j}\",\"JD\", \"xiaoan\"]}"  
+        peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"transfer\", \"${key}${i}${j}\",\"JD\", \"xiaoan\", \"1480835530\"]}"  
         #echo "the key is : ${key}${i}${j}"
     sleep $waittime
     done

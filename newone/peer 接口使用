@@ -3,9 +3,9 @@ peer chaincode deploy -p mycc -c '{"Args": ["init","a"]}'
 
 invoke：
 创建发票
-	peer chaincode invoke -n mycc -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"metadata\"]}"  
+	peer chaincode invoke -n mycc -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"1480835530\", \"metadata\"]}"  
 转移发票
-	peer chaincode invoke -n mycc -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\"]}" 
+	peer chaincode invoke -n mycc -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"1480835530\"]}" 
 
 query:
 查询商家发票记录：

@@ -3,10 +3,10 @@
 time: unix timestamp
 invoke:
 	1. 开发票（create）：
-	[uuid,from,to，metadata,]owner,history
+	[uuid,from,to，timestamp, metadata,]owner,history
 
 	2. 流转(transfer)：
-	[uuid，owner，to]
+	[uuid，owner，to, timestamp]
 
 query:
 	1. 查询自己的，指定时间(myhistory)

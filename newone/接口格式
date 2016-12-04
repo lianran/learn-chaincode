@@ -17,7 +17,7 @@ init:
 
 
 create:
-  需要传入至少3个参数：uuid,开发票方，收发票方,(metadata)
+  需要传入至少3个参数：uuid,开发票方，收发票方, timestamp, (metadata)
   {
     "jsonrpc": "2.0",
     "method": "invoke",
@@ -27,14 +27,14 @@ create:
           "name": "mycc"
       },
       "ctorMsg": {
-          "args":["create","00001","JD","PKU","metadata"]
+          "args":["create","00001","JD","PKU","1480835530","metadata"]
       }
     },
     "id": 1
   }
 
 transfer:
-  需要传入3个参数：uuid，持有者id和接受方id
+  需要传入3个参数：uuid，持有者id和接受方id，timestamp
   {
     "jsonrpc": "2.0",
     "method": "invoke",
@@ -44,7 +44,7 @@ transfer:
           "name": "mycc"
       },
       "ctorMsg": {
-          "args":["transfer","00001","JD","xiaoan"]
+          "args":["transfer","00001","JD","xiaoan","1480835530"]
       }
     },
     "id": 1
