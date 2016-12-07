@@ -175,7 +175,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 			return nil, fmt.Errorf("transfer operation failed. Error updating state: %s", err)
 		}
 		//ToDo: some check for the state of puting 
-		key = owner + sp + sp + uuid
+		key = owner + sp + "sp" + uuid
 		err = stub.PutState(key, []byte(timestamp))
 		if err != nil {
 			fmt.Printf("Error putting state for owner : %s", err)
@@ -225,7 +225,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		if bus {
 			keysIter, err = stub.RangeQueryState(owner + sp + starttime, owner + sp + endtime)
 		} else {
-			keysIter, err = stub.RangeQueryState(owner + sp + sp + "0", owner + sp + sp + "Z")
+			keysIter, err = stub.RangeQueryState(owner + sp + "sp" + "0", owner + sp + "sp" + "Z")
 		}
 
 		
