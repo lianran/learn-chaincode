@@ -225,7 +225,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		if bus {
 			keysIter, err = stub.RangeQueryState(owner + sp + starttime, owner + sp + endtime)
 		} else {
-			keysIter, err = stub.RangeQueryState(owner + sp + sp + "0", owner + sp + sp + "Z")
+			keysIter, err = stub.RangeQueryState(owner + sp + sp + "0", owner + sp + sp + "z")
 		}
 
 		
