@@ -7,7 +7,7 @@ echo "one round will invoke $num txs"
 echo "every tx will wait $waittime s"
 echo "there will have $round rounds"
 echo "the key for this test is $key"
-unixtime=$(date +%s -d '1990-01-01 01:01:01')
+unixtime=$(date +%s)
 date
 CC_ID="mycc"
 for ((i=0; i < $round; i++)); do
