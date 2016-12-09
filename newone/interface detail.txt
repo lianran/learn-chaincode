@@ -4,7 +4,7 @@
 	1. create:
 		Done:
 			1. 传入至少3个参数:uuid、fromid和toid，其中metadata是可选内容。
-			2. 将以上数据以（uuid, fromid + toid + history + metadata + owner）的形式存储，并存储(fromid+timestamp+uuid, timestamp)以及（fromid + timestamp + uuid, timestamp）
+			2. 将以上数据以（uuid, fromid + toid + history + metadata + owner）的形式存储，并存储(fromid+timestamp+uuid, timestamp)以及（toid + timestamp + uuid, timestamp）
 			3. 可能需要做一些必要的检查
 				a. fromid != toid
 				b. 可能需要在创建发票的时候检查发票是否已经存在
@@ -13,7 +13,7 @@
 	2. transfer:
 		Done:
 			1. 传入三个参数：uuid、ownerid和toid
-			2. 更改（uuid,）数据，其中包含value中的history和owner，并存储新的键值对（ownerid + timestamp, timestamp）
+			2. 更改（uuid,）数据，其中包含value中的history和owner，并存储新的键值对（ownerid + uuid, timestamp）
 			3. 可能需要做的一些必要的检查
 				a. 是否为发票持有者进行转移 ownerid == owner(读出来的)
 				b. 是否何以流转 owner != toid

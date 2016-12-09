@@ -7,12 +7,15 @@ echo "one round will invoke $num txs"
 echo "every tx will wait $waittime s"
 echo "there will have $round rounds"
 echo "the key for this test is $key"
+unixtime=$(date +%s -d '1990-01-01 01:01:01')
+fromid="JD"
+toid="xiaoming"
 date
 CC_ID="mycc"
 for ((i=0; i < $round; i++)); do
     echo "round $i"
     for ((j=0; j < $num; j++)); do
-        peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"transfer\", \"${key}${i}${j}\",\"JD\", \"xiaoan\", \"1480835530\"]}"  
+        peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"transfer\", \"cp_${key}_${j}\",\"${formid}\", \"${toid}\", \"${unixtime}\"]}"  
         #echo "the key is : ${key}${i}${j}"
     sleep $waittime
     done
