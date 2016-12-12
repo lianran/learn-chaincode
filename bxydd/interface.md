@@ -10,11 +10,11 @@
 	存入 (R+id+timestamp,outid+balance) -> 用于记录用户的交易记录
 ###### transfer
 转账
-1. 传入参数 (outid, inid, ammount, timestamp)
+1. 传入参数 (outid, inid, amount, timestamp)
 2. 存入内容：
 	修改 outid和inid balance
-	存入 (S+outid+timestamp, inid+ammount)
-	存入 (R+inid+timestamp, outid+ammount)
+	存入 (S+outid+timestamp, inid+amount)
+	存入 (R+inid+timestamp, outid+amount)
 ##### query
 ###### getbalance
 查询余额
@@ -24,6 +24,8 @@
 查询历史
 1. 传入参数 id和time（非必须）
 2. 返回参数 list of history
+	单条格式为 R/S + sp + inid/outid + sp + timestamp, outid/inid + sp + amount
+	这里sp暂时设置为"\n"
 
 ###peer接口使用
 #####测试部署
@@ -48,6 +50,6 @@
 	查询历史
 		peer chaincode query -n ${mycc} -c "{\"Args\": [\"history\", \"id\",\"233\"]}"
 	查询余额：
-		peer chaincode query -n ${mycc} -c "{\"Args\": [\"balance\", \"id\"]}"
+		peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbalance\", \"id\"]}"
 #####连续测试命令233
 	see the test.sh

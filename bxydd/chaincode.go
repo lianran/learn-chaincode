@@ -217,12 +217,14 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		defer keysIter.Close()
 
 		var keys []string
+		var val []byte
 		for keysIter.HasNext() {
 			key, _, iterErr := keysIter.Next()
 			if iterErr != nil {
 				return nil, fmt.Errorf("get history operation failed. Error accessing state: %s", err)
 			}
-			keys = append(keys, key)
+			val, err = stub.GetState(key)
+			keys = append(keys, key + "," + string(val))
 		}
 		//do the range query for the sent
 		keysIter, err = stub.RangeQueryState("S" + sp + id + sp + starttime, "S" + sp + id + sp + endtime)
@@ -236,7 +238,8 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 			if iterErr != nil {
 				return nil, fmt.Errorf("get history operation failed. Error accessing state: %s", err)
 			}
-			keys = append(keys, key)
+			val, err = stub.GetState(key)
+			keys = append(keys, key + "," + string(val))
 		}
 		
 		jsonKeys, err := json.Marshal(keys)
