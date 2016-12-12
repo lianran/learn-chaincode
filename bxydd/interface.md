@@ -29,22 +29,25 @@
 #####测试部署
 	go build 
 	CORE_CHAINCODE_ID_NAME=mycc CORE_PEER_ADDRESS=0.0.0.0:7051 ./chaincode
-#####调用
+#####使用方法
 	
 	mycc="mycc"
 	path="https://github.com/lianran/learn-chaincode/newone"
+	unixtime=$(date +%s)
 
 	deploy:
 	peer chaincode deploy -n ${mycc} -c '{"Args": ["init","a"]}'
 
 	invoke：
 	创建用户
-		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"id1\",\"1000\",  \"1480835530\"]}"  
+		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"id1\",\"1000\",  \"${unixtime}\"]}"  
 	转账
-		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"outid\",\"inid\", \"10\", \"1480835530\"]}" 
+		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"outid\",\"inid\", \"10\", \"${unixtime}\"]}" 
 
 	query:
 	查询历史
-		peer chaincode query -n ${mycc} -c "{\"Args\": [\"history\", \"id\",\"1480835530\"]}"
+		peer chaincode query -n ${mycc} -c "{\"Args\": [\"history\", \"id\",\"233\"]}"
 	查询余额：
 		peer chaincode query -n ${mycc} -c "{\"Args\": [\"balance\", \"id\"]}"
+#####连续测试命令233
+	see the test.sh

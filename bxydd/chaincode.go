@@ -20,7 +20,6 @@ import (
 	"errors"
 	"time"
 	"fmt"
-	"strings"
 	"strconv"
 	"encoding/json"
 
@@ -68,7 +67,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 			return nil, errors.New("Expecting integer value for asset holding")
 		}
 		//check the timestamp
-		timestamp := args[3]
+		timestamp := args[2]
 		ts := time.Now().Unix() 
 		tm, err := strconv.ParseInt(timestamp, 10, 64) 
 		if err != nil {
@@ -99,7 +98,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 
 		//store history
 		key = "R" + sp + id + sp + timestamp
-		value := "admin" + sp + balance
+		value := "admin" + sp + strconv.Itoa(balance)
 		err = stub.PutState(key, []byte(value))
 		if err != nil {
 			fmt.Printf("Error putting state for fromid : %s", err)
@@ -137,7 +136,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
 		}
-		if value == nil {
+		if Aval == nil {
 			return nil, fmt.Errorf(" the user (inid: %s) not exists!", A)
 		}
 
@@ -146,22 +145,22 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 		if err != nil {
 			return nil, fmt.Errorf("get opereation failed. Error accessing state: %s", err)
 		}
-		if value == nil {
+		if Bval == nil {
 			return nil, fmt.Errorf(" the user (outid: %s) not exists", B)
 		}
 
 		// perform the execution
-		Abal, _: = strconv.Atoi(Aval)
-		Bbal, _ := strconv.Atoi(Bval)
+		Abal, _ := strconv.Atoi(string(Aval))
+		Bbal, _ := strconv.Atoi(string(Bval))
 		Abal = Abal - toval
 		Bbal = Bbal + toval
 
 		//Write the state back to the ledger
-		err = stub.PutState(inid, []byte(strconv.Itoa(Abal)))
+		err = stub.PutState(A, []byte(strconv.Itoa(Abal)))
 		if err != nil {
 			return nil, err
 		}
-		err = stub.PutState(outid, []byte(strconv.Itoa(Bbal)))
+		err = stub.PutState(B, []byte(strconv.Itoa(Bbal)))
 
 		//record the history to db
 		key := "S" + sp + A + sp + timestamp
@@ -171,7 +170,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 			return nil, err
 		}
 		key = "R" + sp + B + sp +timestamp
-		value := A + sp + amount
+		value = A + sp + amount
 		err = stub.PutState(key, []byte(value))
 		if err != nil {
 			return nil, err
@@ -200,7 +199,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		tm := int64(3600)
 		var err error
 		if len(args) >= 2{
-			tm, err = strconv.ParseInt(args[2], 10, 64)
+			tm, err = strconv.ParseInt(args[1], 10, 64)
 		}
 		if err != nil {
 			return nil, fmt.Errorf("get history failed. Bad format of the time: %s", err)
@@ -211,7 +210,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		endtime := strconv.FormatInt(ts,10)
 
 		//do the range query for the recevied
-		keysIter, err = stub.RangeQueryState("R" + sp + id + sp + starttime, "R" + sp + id + sp + endtime)
+		keysIter, err := stub.RangeQueryState("R" + sp + id + sp + starttime, "R" + sp + id + sp + endtime)
 		if err != nil {
 			return nil, fmt.Errorf("get history failed. Error accessing state: %s", err)
 		}
@@ -262,7 +261,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		}
 
 		return val, nil
-		
+
 	default:
 		return nil, errors.New("Unsupported operation")
 	}
