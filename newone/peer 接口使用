@@ -1,14 +1,15 @@
 
 mycc="mycc"
 path="https://github.com/lianran/learn-chaincode/newone"
+unixtime=$(date +%s)
 
 
 deploy:
-peer chaincode deploy -n ${mycc} -c '{"Args": ["init","a"]}'
+peer chaincode deploy -p ${path} -c '{"Args": ["init","a"]}'
 
 invoke：
 创建发票
-	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"1480835530\", \"metadata\"]}"  
+	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"${unixtime}\", \"metadata\"]}"  
 转移发票
 	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"1480835530\"]}" 
 

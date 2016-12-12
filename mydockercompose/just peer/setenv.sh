@@ -21,5 +21,5 @@ esac
 cat baseimage/Dockerfile.in | sed -e "s/_ARCH_TAG_/$ARCH_TAG/g" > baseimage/Dockerfile
 
 #export the ip of vp0 and membersrvc
-export vp0=""
-export membersrvc=""
+export vp0="10.0.2.53"
+export membersrvc="10.0.2.53"
