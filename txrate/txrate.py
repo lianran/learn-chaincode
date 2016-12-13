@@ -62,7 +62,7 @@ while True:
         if cnt%10 == 0:
             print(str(time.time()) + " : no new blocks")
     else:
-        #get the new blocks
+        #get the new blockscee
         for i in range(pre_height, now_height):
             (num, timestamp) = get_blocks_txsnum_time(url_blocks + str(i))
             list_blocks.append({"num":num, "timestamp":timestamp, "blocksnum": i})
