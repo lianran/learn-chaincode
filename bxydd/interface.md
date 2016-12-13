@@ -3,9 +3,9 @@
 	do nothing
 ##### invoke
 ###### create
-创建用户并获得初始余额
-1. 传入参数 (id, balance,timestamp)
-2. 操作：
+创建用户并获得初始余额    
+1. 传入参数 (id, balance,timestamp)  
+2. 操作：  
 	存入 (id, balance) -> 作为该用户balance记录，将一直存在
 	存入 (R+id+timestamp,outid+balance) -> 用于记录用户的交易记录
 ###### transfer
@@ -22,10 +22,10 @@
 2. 返回参数 balance
 ###### history
 查询历史
-1. 传入参数 id和time（非必须）
-2. 返回参数 list of history  
-	单条格式为 R/S + sp + inid/outid + sp + timestamp, outid/inid + sp + amount  
-	这里sp暂时设置为"\n"  
+1. 传入参数 id和time（非必须）  
+2. 返回参数 list of history    
+	单条格式为 R/S + sp + inid/outid + sp + timestamp, outid/inid + sp + amount    
+	这里sp暂时设置为"\n"    
 
 ###peer接口使用
 #####测试部署
