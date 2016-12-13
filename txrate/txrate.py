@@ -18,7 +18,11 @@ def get_blocks_txsnum_time(url):
     timestamp = data['nonHashData']['localLedgerCommitTimestamp']['seconds'] + data['nonHashData']['localLedgerCommitTimestamp']['nanos']*1.0/1e9
     #print(time)
     #get tne num of txs
-    numoftxs = len(data['transactions'])
+    try:
+    	numoftxs = len(data['transactions'])
+    except:
+    	numoftxs = 0
+    	print(data)
     #print(numoftxs)
     return (numoftxs, timestamp)
 def get_height(url):
@@ -49,7 +53,7 @@ for i in range(pre_height-10, pre_height):
     print({"num":num, "timestamp":timestamp, "blocksnum": i})
 
 print("the pre"),
-cal_rate(5)
+max_rate = cal_rate(5)
 #loop to get the blcoks and some thing
 cnt = 0
 while True:
@@ -65,7 +69,10 @@ while True:
             print("new block:" + str({"num":num, "timestamp":timestamp, "blocksnum": i}))
         #show the txRate
         pre_height = now_height
-        cal_rate(3)
+        now_rate = cal_rate(3)
+        if now_rate > max_rate:
+        	max_rate = now_rate
+        print("the max tx_rate is :" + str(max_rate))
         cnt = 0
     time.sleep(0.5)
     cnt += 1
