@@ -36,7 +36,7 @@ def cal_rate(k):
     len_list = len(list_blocks)
     endtime = list_blocks[len_list-1]['timestamp']
     count = list_blocks[len_list-1]['num']
-    for i in (len_list-2, len_list-k-1, -1):
+    for i in range(len_list-2, len_list-k-1, -1):
         if i < 0:
             break
         count += list_blocks[i]['num']
