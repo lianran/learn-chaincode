@@ -3,9 +3,11 @@ mycc="mycc"
 path="https://github.com/lianran/learn-chaincode/newone"
 unixtime=$(date +%s)
 
+login in:
+peer network login jim -p 6avZQLwcUe9b
 
 deploy:
-peer chaincode deploy -p ${path} -c '{"Args": ["init","a"]}'
+peer chaincode deploy -p ${path} -c '{"Args": ["init","a"]}' -u jim
 
 invoke：
 创建发票
