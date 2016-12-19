@@ -8,6 +8,8 @@ unixtime=$(date +%s)
 peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"b\",\"1000\",  \"${unixtime}\"]}"
 unixtime=$(date +%s)
 peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"c\",\"1000\",  \"${unixtime}\"]}"
+#wait for the tx executed
+sleep 2
 echo "get the balance of a"
 peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbalance\", \"a\"]}"
 echo "get teh balance of b"
@@ -17,6 +19,8 @@ peer chaincode query -n ${mycc} -c "{\"Args\": [\"history\", \"a\",\"1\"]}"
 echo "transfer a to b 100"
 unixtime=$(date +%s)
 peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"a\",\"b\", \"10\", \"${unixtime}\"]}" 
+#wait for the tx executed
+sleep 2
 echo "get the balance of a and b"
 peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbalance\", \"a\"]}"
 peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbalance\", \"b\"]}"

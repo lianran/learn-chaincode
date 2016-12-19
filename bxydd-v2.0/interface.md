@@ -8,7 +8,8 @@
 2. 操作：  
 	存入 (id, balance) -> 作为该用户balance记录，将一直存在
 	存入 (id+"numoftx", 1) -> 用于存储与用户有关的交易数量的条数
-	存入 (id+1,R+outid+balance+timestamp) -> 用于记录用户的交易记录
+	m:存入 (id+1,R+outid+balance+timestamp) -> 用于记录用户的交易记录
+	t:只查创建用户，而不进行初始转账
 ###### transfer
 转账  
 1. 传入参数 (outid, inid, amount, timestamp)  
@@ -30,7 +31,8 @@
 1. 传入参数 id和num  
 2. 返回参数   
 	格式为 R/S+sp+outid/inid + sp + amount + sp + timestamp    
-	这里sp暂时设置为"\n"    
+	这里sp暂时设置为"\n" 
+3. todo：检查num的合理性   
 
 ###peer接口使用
 #####测试部署

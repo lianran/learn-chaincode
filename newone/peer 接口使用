@@ -1,5 +1,5 @@
 
-mycc="mycc"
+mycc="e52df642ea703c93018f1512da0e0d838c73b82bcdc6ded4cd26e12f83076c9fe3840d603fb27d7b04544447e8948cc0f8fec9c0f815085015147aa06548147d"
 path="https://github.com/lianran/learn-chaincode/newone"
 unixtime=$(date +%s)
 
@@ -13,7 +13,7 @@ invoke：
 创建发票
 	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"${unixtime}\", \"metadata\"]}"  
 转移发票
-	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"1480835530\"]}" 
+	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"${unixtime}\"]}" 
 
 query:
 查询商家发票记录：

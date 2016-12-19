@@ -167,6 +167,9 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 			return nil, err
 		}
 		err = stub.PutState(B, []byte(strconv.Itoa(Bbal)))
+		if err != nil {
+			return nil, err
+		}
 
 		//record the history to db
 		//get the txs num of A and B
