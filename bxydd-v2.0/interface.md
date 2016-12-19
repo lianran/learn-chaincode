@@ -1,15 +1,15 @@
 ###chaincode 设计
 ##### init
-	do nothing
+	初始化admin参数
+	存入 (admin,0)
+	存入 (admin+"numoftx", 0)
 ##### invoke
 ###### create
 创建用户并获得初始余额    
 1. 传入参数 (id, balance,timestamp)  
 2. 操作：  
-	存入 (id, balance) -> 作为该用户balance记录，将一直存在
-	存入 (id+"numoftx", 1) -> 用于存储与用户有关的交易数量的条数
-	m:存入 (id+1,R+outid+balance+timestamp) -> 用于记录用户的交易记录
-	t:只查创建用户，而不进行初始转账
+	存入 (id, 0) -> 作为该用户balance记录，将一直存在
+	存入 (id+"numoftx", 0) -> 用于存储与用户有关的交易数量的条数
 ###### transfer
 转账  
 1. 传入参数 (outid, inid, amount, timestamp)  
@@ -48,7 +48,7 @@
 
 	invoke： 
 	创建用户  
-		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"id1\",\"1000\",  \"${unixtime}\"]}"    
+		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"id1\",  \"${unixtime}\"]}"    
 	转账
 		peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"outid\",\"inid\", \"10\", \"${unixtime}\"]}"   
 
@@ -61,3 +61,5 @@
 		peer chaincode query -n ${mycc} -c "{\"Args\": [\"gettxnum\", \"id\"]}"
 #####连续测试命令233
 	see the test.sh
+### ToDo
+	1. 转账admin特殊操作：对admin转账时的检查进行放宽，达到发币的目的。

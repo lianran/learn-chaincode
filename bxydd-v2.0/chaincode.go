@@ -47,6 +47,16 @@ func (t *myChaincode) Init(stub shim.ChaincodeStubInterface, function string, ar
 		return nil, errors.New("Incorrect number of arguments. Expecting 1")
 	}
 
+	//init the admin 
+	limit := 1000000000000
+	err := stub.PutState("admin", []byte(strconv.Itoa(limit)))
+	if err != nil {
+		return nil, errors.New("init the admin error")
+	}
+	err = stub.PutState("admin" + sp + "numoftx", []byte(strconv.Itoa(0)))
+	if err != nil {
+		return nil, errors.New("init the admin error")
+	}
 	return nil, nil
 }
 
@@ -55,18 +65,14 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 	switch function {
 
 	case "create":
-		if len(args) < 3{
-			return nil, errors.New("create operation must include at last three arguments, a new id , the balance and timestamp")
+		if len(args) < 2{
+			return nil, errors.New("create operation must include at last three arguments, a new id  and  timestamp")
 		}
 		// get the args
 		id := args[0]
-		//check the balance format
-		balance, err := strconv.Atoi(args[1])
-		if err != nil {
-			return nil, errors.New("Expecting integer value for asset holding")
-		}
+
 		//check the timestamp
-		timestamp := args[2]
+		timestamp := args[1]
 		ts := time.Now().Unix() 
 		tm, err := strconv.ParseInt(timestamp, 10, 64) 
 		if err != nil {
@@ -87,27 +93,19 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 
 		//creat the user
 		key := id
-		fmt.Printf("the new id is %s and the balance is %s", key, strconv.Itoa(balance))
+		fmt.Printf("the new id is %s and the balance is %s", key, strconv.Itoa(0))
 		// put the balance
-		err = stub.PutState(key, []byte(strconv.Itoa(balance)))
+		err = stub.PutState(key, []byte(strconv.Itoa(0)))
 		if err != nil {
 			fmt.Printf("Error putting state %s", err)
 			return nil, fmt.Errorf("create operation failed. Error updating state: %s", err)
 		}
 		// put the num of tx
 		key = id + sp + "numoftx"
-		err = stub.PutState(key, []byte(strconv.Itoa(1)))
+		err = stub.PutState(key, []byte(strconv.Itoa(0)))
 		if err != nil {
 			fmt.Printf("Error putting state %s", err)
 			return nil, fmt.Errorf("create operation failed. Error updating state: %s", err)
-		}
-
-		//store history
-		key = id + sp + strconv.Itoa(1)
-		value := "R" + sp + "admin" + sp + strconv.Itoa(balance) + timestamp
-		err = stub.PutState(key, []byte(value))
-		if err != nil {
-			fmt.Printf("Error putting state for fromid : %s", err)
 		}
 		return nil,nil
 
@@ -225,7 +223,19 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		}
 		id := args[0]
 		num := args[1]
-		//Todo: some check for the num
+
+		//some check for the num
+
+		val_num, err := stub.GetState(id + sp + "numoftx")
+		if err != nil {
+			return nil, fmt.Errorf("history failed. Error accessing state: %s", err)
+		}
+		int_val, _ := strconv.Atoi(string(val_num))
+		int_num, _ := strconv.Atoi(string(num))
+		fmt.Println(int_val,int_num)
+		if int_val < int_num || int_num <= 0 {
+			return nil,fmt.Errorf("Incorrect tx num")
+		}
 
 		val, err := stub.GetState(id + sp + num)
 		if err != nil {
