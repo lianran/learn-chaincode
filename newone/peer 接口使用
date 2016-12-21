@@ -1,5 +1,5 @@
 
-mycc="a8917f5099dd41cd78573b4e0d8b5c6916bcd6c6ea29a00039ba62115ba479f4d8c59a02e1089952f8de66ff0e514852aff8dcdf2c0862f57d5eddf273a27f49"
+mycc="db4fa76606a419673dfc30c929b3950f37c9525ce9739d510b4d4e6529a1986e898435ce5cb36725dd48eb9b48fa8d9b5b18417070c1079db9c8045698ff760c"
 path="https://github.com/lianran/learn-chaincode/newone"
 unixtime=$(date +%s)
 
@@ -11,6 +11,7 @@ peer chaincode deploy -p ${path} -c '{"Args": ["init","a"]}' -u jim
 
 invoke：
 创建发票
+	unixtime=$(date +%s)
 	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"${unixtime}\", \"metadata\"]}"  
 转移发票
 	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"${unixtime}\"]}" 
