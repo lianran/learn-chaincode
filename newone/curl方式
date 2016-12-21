@@ -1,0 +1,6 @@
+login:
+	curl -X POST -H 'Content-Type:application/json' --data "{\"enrollId\": \"jim\",\"enrollSecret\": \"6avZQLwcUe9b\"}" localhost:7050/registrar
+
+create：
+	unixtime=$(date +%s)
+	curl -X POST -H 'Content-Type:application/json' --data "{\"jsonrpc\":\"2.0\",\"method\":\"invoke\",\"params\":{\"type\":1,\"chaincodeID\":{\"name\":\"a8917f5099dd41cd78573b4e0d8b5c6916bcd6c6ea29a00039ba62115ba479f4d8c59a02e1089952f8de66ff0e514852aff8dcdf2c0862f57d5eddf273a27f49\"},\"ctorMsg\":{\"args\":[\"create\",\"000023\",\"JD\",\"PKU\",\"${unixtime}\",\"metadata\"]},\"secureContext\":\"jim\"},\"id\":1}" localhost:7050/chaincode

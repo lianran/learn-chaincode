@@ -14,7 +14,8 @@ CC_ID="mycc"
 for ((i=0; i < $round; i++)); do
     echo "round $i"
     for ((j=0; j < $num; j++)); do
-        peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"create\", \"cp_${i}_${key}_${j}\",\"JD\", \"PKU\", \"${unixtime}\", \"price:${i}${j}\"]}"  -u ${user} &
+        #peer chaincode invoke -n ${CC_ID} -c "{\"Args\": [\"create\", \"cp_${i}_${key}_${j}\",\"JD\", \"PKU\", \"${unixtime}\", \"price:${i}${j}\"]}"  -u ${user} &
+        curl -X POST -H 'Content-Type:application/json' --data "{\"jsonrpc\":\"2.0\",\"method\":\"invoke\",\"params\":{\"type\":1,\"chaincodeID\":{\"name\":\"${CC_ID}\"},\"ctorMsg\":{\"args\":[\"create\",\"cp_${i}_${key}_${j}\",\"JD\",\"PKU\",\"${unixtime}\",\"price:${i}${j}\"]},\"secureContext\":\"${user}\"},\"id\":1}" localhost:7050/chaincode
         #echo "the key is : ${key}${i}${j}"
     #sleep $waittime
     done

@@ -3,8 +3,8 @@ import json
 import time
 
 #some var
-url_blocks = "http://162.105.30.216:37050/chain/blocks/"
-url_height = "http://162.105.30.216:37050/chain"
+url_blocks = "http://localhost:7050/chain/blocks/"
+url_height = "http://localhost:7050/chain"
 list_blocks = []
 #{"num":num, "time":time, "blocksnum": i}
 
@@ -41,7 +41,9 @@ def cal_rate(k):
             break
         count += list_blocks[i]['num']
     startime = list_blocks[len_list-k-1]['timestamp']
+    rate = count/(endtime-startime)
     print("txRate is:" + str(count/(endtime-startime)))
+    return rate
     
 #init get the pre 10 blocks
 pre_height = get_height(url_height)
@@ -53,6 +55,7 @@ for i in range(pre_height-10, pre_height):
     print({"num":num, "timestamp":timestamp, "blocksnum": i})
 
 print("the pre"),
+max_rate = 0
 max_rate = cal_rate(5)
 #loop to get the blcoks and some thing
 cnt = 0
@@ -69,6 +72,7 @@ while True:
             print("new block:" + str({"num":num, "timestamp":timestamp, "blocksnum": i}))
         #show the txRate
         pre_height = now_height
+        now_rate = 0
         now_rate = cal_rate(3)
         if now_rate > max_rate:
         	max_rate = now_rate
