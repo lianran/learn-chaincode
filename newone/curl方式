@@ -1,10 +1,11 @@
-mycc="5312f379917a15c02e19e0457088b34cf050171b1d0acef0b326f465b87f8d21592cdaa7da9f6bfd0883d77b507e8a3f530d8756beee10ce4eba0af0f63a899e"
+mycc="a2e1750d8a559eb9934ba40034242cb23b011cf6a26e4144f1daea7ac563c85acb5eab9dd0ed553031a960568c5f8103baa9328b5af90d4a5fab792b06e45d8e"
 path="https://github.com/lianran/learn-chaincode/newone"
 unixtime=$(date +%s)
 
 
 login:
 	curl -X POST -H 'Content-Type:application/json' --data "{\"enrollId\": \"jim\",\"enrollSecret\": \"6avZQLwcUe9b\"}" localhost:7050/registrar
+	curl -X POST -H 'Content-Type:application/json' --data "{\"enrollId\": \"admin\",\"enrollSecret\": \"Xurw3yU9zI0l\"}" localhost:8050/registrar
 delpoy
 	curl -X POST -H 'Content-Type:application/json' --data "{\"jsonrpc\":\"2.0\",\"method\":\"deploy\",\"params\":{\"type\":1,\"chaincodeID\":{\"path\":\"${path}\"},\"ctorMsg\":{\"function\":\"init\",\"args\":[\"hithere\"]},\"secureContext\":\"jim\"},\"id\":1}" localhost:7050/chaincode
 	
