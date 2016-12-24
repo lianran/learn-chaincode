@@ -23,3 +23,5 @@ query:
 	peer chaincode query -n ${mycc} -c "{\"Args\": [\"myhistory\", \"xiaoan\",\"2\"]}"
 查询发票详细信息：
 	peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbill\", \"00001\",\"xiaoan\"]}"
+查询发票metadata信息
+	peer chaincode query -n ${mycc} -c "{\"Args\": [\"getmetadata\", \"00001\",\"xiaoan\"]}"
