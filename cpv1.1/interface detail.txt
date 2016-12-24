@@ -6,7 +6,7 @@
 			1. 传入至少3个参数:uuid、fromid和toid，其中metadata是可选内容。
 			2. 将以上数据以
 			（uuid, fromid + toid + history + owner）和
-			(uuid+"md",metadata)
+			 (uuid+"md",metadata)
 			的形式存储，并存储(fromid+timestamp+uuid, timestamp)以及（toid + timestamp + uuid, timestamp）
 			3. 可能需要做一些必要的检查
 				a. fromid != toid
@@ -40,13 +40,17 @@
 	3. getbill:
 		Done:
 			1. 传入至少2个参数：uuid和ownerid（或者fromid、toid）
-			2. 返回发票信息
+			2. 返回发票基本信息（包括流转）
 			3. 可能需要的做的一些必要的检查
 				a. 是否有权查看此发票
 				b. 加入发票是否存在的提示
 	4. getmetadata:
-		Done
-
+		Done:
+			1. 传入至少2个参数：uuid和ownerid（或者fromid、toid）
+			2. 返回发票metadata信息
+			3. 可能需要的做的一些必要的检查
+				a. 是否有权查看此发票
+				b. 加入发票是否存在的提示
 		ToDo:
 			do some check?
 
