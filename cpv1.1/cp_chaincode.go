@@ -318,7 +318,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		// check the ownership
 		fromid := listValue[0]
 		toid := listValue[1]
-		owner := listValue[4]
+		owner := listValue[3]
 		if _owner != owner && _owner != fromid && _owner != toid{
 			return []byte("you don't have the right to get this bill"), nil
 		}
@@ -331,7 +331,7 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		_owner := args[1]
 
 		//ToDo: some checks?
-		key := uuid + sp + "md"
+		key := uuid
 		value, err := stub.GetState(key)
 		if err != nil {
 			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
@@ -343,9 +343,15 @@ func (t *myChaincode) Query(stub shim.ChaincodeStubInterface, function string, a
 		// check the ownership
 		fromid := listValue[0]
 		toid := listValue[1]
-		owner := listValue[4]
+		owner := listValue[3]
 		if _owner != owner && _owner != fromid && _owner != toid{
-			return []byte("you don't have the right to this bill's metadata"), nil
+			return []byte("you don't have the right to get this bill"), nil
+		}
+		//get the metadata
+		key = uuid + sp + "md"
+		value, err = stub.GetState(key)
+		if err != nil {
+			return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
 		}
 		return value, nil
 	default:

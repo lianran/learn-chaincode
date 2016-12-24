@@ -1,6 +1,6 @@
 
-mycc="db4fa76606a419673dfc30c929b3950f37c9525ce9739d510b4d4e6529a1986e898435ce5cb36725dd48eb9b48fa8d9b5b18417070c1079db9c8045698ff760c"
-path="https://github.com/lianran/learn-chaincode/newone"
+mycc="mycc"
+path="https://github.com/lianran/learn-chaincode/cpv1.1"
 unixtime=$(date +%s)
 
 login in:
