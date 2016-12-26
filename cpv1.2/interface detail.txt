@@ -49,9 +49,9 @@
 				c. status 检查
 		ToDo:
 			?
-	3. 报销（submit)：
+	3. 申请报销（submit)：
 		Done:
-			1. 传入至少四个参数：uuid、ownerid、timestamp和data
+			1. 传入至少四个参数：[uuid1,uuid2....]、ownerid、timestamp和data
 			2. 数据：
 				修改发票基本消息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm）
 					更改 status为2
