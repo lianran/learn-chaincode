@@ -50,7 +50,7 @@
 		ToDo:
 			?
 	3. 报销（submit)：
-		ToDo:
+		Done:
 			1. 传入至少四个参数：uuid、ownerid、timestamp和data
 			2. 数据：
 				修改发票基本消息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm）
@@ -63,7 +63,7 @@
 				a. 是否为发票持有者进行报销 ownerid == owner
 				b. 是否可以报销 status == 1
 	4. 确认报销（confirm）:
-		ToDo:
+		Done:
 			1. 传入至少三个参数uuid，收票方id和timestamp
 			2. 数据：
 				修改发票基本消息  (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm)
@@ -75,7 +75,7 @@
 				a. 发票状态是否为待报销状态2
 				b. 权限问题？
 	5. 不认可报销 （reject）:
-		ToDo:
+		Done:
 			1.传入至少四个参数uuid、收票方id、不可报销理由和timestamp
 			2. 数据：
 				修改发票基本信息 (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm)
@@ -121,7 +121,7 @@
 		ToDo:
 			do some check?
 	5. getreimburseinfo：
-		ToDo：
+		Done：
 			1. 传入至少2个参数： uuid和ownerid
 			2. 返回发票的reimburseinfo
 			3. 可能需要加入一些必要的检查
