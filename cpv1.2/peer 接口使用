@@ -1,0 +1,25 @@
+
+mycc="db4fa76606a419673dfc30c929b3950f37c9525ce9739d510b4d4e6529a1986e898435ce5cb36725dd48eb9b48fa8d9b5b18417070c1079db9c8045698ff760c"
+path="https://github.com/lianran/learn-chaincode/newone"
+unixtime=$(date +%s)
+
+login in:
+peer network login jim -p 6avZQLwcUe9b
+
+deploy:
+peer chaincode deploy -p ${path} -c '{"Args": ["init","a"]}' -u jim
+
+invoke：
+创建发票
+	unixtime=$(date +%s)
+	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"create\", \"00001\",\"JD\", \"PKU\", \"${unixtime}\", \"metadata\"]}"  
+转移发票
+	peer chaincode invoke -n ${mycc} -c "{\"Args\": [\"transfer\", \"00001\",\"JD\", \"xiaoan\", \"${unixtime}\"]}" 
+
+query:
+查询商家发票记录：
+	peer chaincode query -n ${mycc} -c "{\"Args\": [\"myhistory\", \"JD\",\"1\"]}"
+查询用户发票记录：
+	peer chaincode query -n ${mycc} -c "{\"Args\": [\"myhistory\", \"xiaoan\",\"2\"]}"
+查询发票详细信息：
+	peer chaincode query -n ${mycc} -c "{\"Args\": [\"getbill\", \"00001\",\"xiaoan\"]}"

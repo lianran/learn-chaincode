@@ -1,0 +1,14 @@
+mycc="a2e1750d8a559eb9934ba40034242cb23b011cf6a26e4144f1daea7ac563c85acb5eab9dd0ed553031a960568c5f8103baa9328b5af90d4a5fab792b06e45d8e"
+path="https://github.com/lianran/learn-chaincode/newone"
+unixtime=$(date +%s)
+
+
+login:
+	curl -X POST -H 'Content-Type:application/json' --data "{\"enrollId\": \"jim\",\"enrollSecret\": \"6avZQLwcUe9b\"}" localhost:7050/registrar
+	curl -X POST -H 'Content-Type:application/json' --data "{\"enrollId\": \"admin\",\"enrollSecret\": \"Xurw3yU9zI0l\"}" localhost:8050/registrar
+delpoy
+	curl -X POST -H 'Content-Type:application/json' --data "{\"jsonrpc\":\"2.0\",\"method\":\"deploy\",\"params\":{\"type\":1,\"chaincodeID\":{\"path\":\"${path}\"},\"ctorMsg\":{\"function\":\"init\",\"args\":[\"hithere\"]},\"secureContext\":\"jim\"},\"id\":1}" localhost:7050/chaincode
+	
+create：
+	unixtime=$(date +%s)
+	curl -X POST -H 'Content-Type:application/json' --data "{\"jsonrpc\":\"2.0\",\"method\":\"invoke\",\"params\":{\"type\":1,\"chaincodeID\":{\"name\":\"${mycc}\"},\"ctorMsg\":{\"args\":[\"create\",\"000023\",\"JD\",\"PKU\",\"${unixtime}\",\"metadata\"]},\"secureContext\":\"jim\"},\"id\":1}" localhost:7050/chaincode

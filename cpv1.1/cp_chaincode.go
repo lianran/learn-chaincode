@@ -129,7 +129,7 @@ func (t *myChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, 
 
 	case "transfer":
 		if len(args) < 4{
-			return nil, errors.New("transfer operation must include at last there arguments, a uuid , a owner , a toid and timestamp")
+			return nil, errors.New("transfer operation must include at last four arguments, a uuid , a owner , a toid and timestamp")
 		}
 		//get the args
 		key := args[0]
