@@ -5,7 +5,7 @@
 		Done:
 			1. 传入至4个参数:uuid、fromid和toid，timestamp其中metadata是可选内容。
 			2. 数据：
-				存入发票基本信息（uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm）
+				存入发票基本信息（uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
 					uuid:发票id
 					fromid: 开票方
 					toid：收票方
@@ -19,6 +19,7 @@
 					createtm: 发票的创建时间 timestamp
 					submittm: 提交报销时间（初始为0）
 					confirmtm：确认报销时间 （初始为0）
+					bxid：报销的编号 （初始为0）
 				存入发票metadata信息 （uuid+"md",metadata）
 					uuid: 发票id
 					metadata: 数据，传入什么存什么
@@ -35,7 +36,7 @@
 		Done:
 			1. 传入四个参数：uuid、ownerid、toid和timestamp
 			2. 数据：
-				修改发票基本信息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm）
+				修改发票基本信息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
 					（初次流转： 更改status状态为1）
 					history：追加",owner"信息
 					owner：更改
@@ -49,60 +50,71 @@
 				c. status 检查
 		ToDo:
 			?
-	3. 申请报销（submit)：
-		Done:
-			1. 传入至少四个参数：[uuid1,uuid2....]、ownerid、timestamp和data
+	3. 申请报销（createbx)：
+		ToDo:
+			1. 传入至少7个参数：bxuuid、[uuid1,uuid2....]、owner、toid、timestamp和bxinfo、endtm
 			2. 数据：
-				修改发票基本消息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm）
+	        	循环数组修改发票基本消息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
+	        		(调用submit)
 					更改 status为2
-					更改 submittm为timestamp
-				存入发票报销信息 （uuid+"bx", data)
-					uuid: 发票id
-					data: 报销数据，传入什么存什么
-			3. 可能需要做的一些检查
+	        		更改 submittm为timestamp
+	        		更改 bxid为bxuuid
+	        	存入 (bxuuid, [uuid1, uuid2...] + owner + toid + endtm + bxinfo）
+	        		[]:发票编号数组
+	        		ownerid： 申请人
+	        		toid: 收票人
+	        		endtm: 报销截止时间
+	        		bxinfo：报销的详细信息
+
+	      3. 可能需要做的一些检查
 				a. 是否为发票持有者进行报销 ownerid == owner
 				b. 是否可以报销 status == 1
-	4. 确认报销（confirm）:
+				c. 检查uuids收票方的一致性 toid == toid
+		ToDo:
+
+	4. 确认报销（confirmbx）:
 		Done:
-			1. 传入至少三个参数uuid，收票方id和timestamp
+			1. 传入至少三个参数bxuuid，收票方id和timestamp
 			2. 数据：
-				修改发票基本消息  (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm)
+				修改发票基本消息  (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid)
+					（调用confirm）
 					更新 status为3
 					更新 history
 					更改 owner
 					更改 confirmtm
 			3. 可能需要做的一些检查
 				a. 发票状态是否为待报销状态2
-				b. 权限问题？
-	5. 不认可报销 （reject）:
+				b. 检查报销时间是否在报销时间以内，不在则重新确认报销，并重置相关状态
+	5. 不认可报销 （rejectbx）:
 		Done:
-			1.传入至少四个参数uuid、收票方id、不可报销理由和timestamp
+			1.传入至少四个参数bxuuid、收票方id、不可报销理由和timestamp
 			2. 数据：
-				修改发票基本信息 (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm)
+				修改发票基本信息 (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid)
+					(调用reject)
 					更新 status 为1
 					更新 confirmtm
-				修改报销信息 （uuid + "bx", data）
-					更新 data为不可报销理由
+				修改报销信息 （bxuuid, [uuid1, uuid2...] + ownerid + toid + reason + bxinfo）
+					更新 bxinfo追加reason
 			3.可能需要做的一些检查
 				a. 发票状态是否为待报销状态2
 				b. 权限问题？
 
 三. query
-	1. myhistory：
+	1. myHistory：
 		现在仅可用于查询商家
 		Done:
 			1. 传入至少2个参数：id，flag, time; 其中flag 为1表示商家，否者为普通用户，时间为可选内容，如果不传入则为3600s(即一个小时)
 			2. 返回keys，其中包含了uuid
 		ToDo：
 			
-	2. getnumofbills:
+	2. getCountofInvoice:
 		提供给商家使用，用于快速查询自己发票数量，也可通过myhistory来查询
 		Done:
 			1. 传入至少1个参数：id, time;其中时间为可选内容，如果不传入则为3600s(即一个小时)
 			2. 返回发票数量
 		ToDo：
 			是否不需要这个接口各，可以使用myhistory完成，但是	可能myhistory返回数据量可能会比较大
-	3. getbill:
+	3. getInvoice:
 		Done:
 			1. 传入至少2个参数：uuid和ownerid（或者fromid、toid）
 			2. 返回发票基本信息（包括流转）
@@ -111,7 +123,7 @@
 				b. 加入发票是否存在的提示
 		ToDo：
 			权限是否更改为，以前拥有过持发票，即可查看该发票的基本信息？
-	4. getmetadata:
+	4. getMetadata:
 		Done:
 			1. 传入至少2个参数：uuid和ownerid（或者fromid、toid）
 			2. 返回发票metadata信息
@@ -120,13 +132,19 @@
 				b. 加入发票是否存在的提示
 		ToDo:
 			do some check?
-	5. getreimburseinfo：
+	5. getReimburseInfo
 		Done：
-			1. 传入至少2个参数： uuid和ownerid
+			1. 传入至少2个参数： uuid和ownerid（或者toid)
 			2. 返回发票的reimburseinfo
 			3. 可能需要加入一些必要的检查
 				a. 是否有权查看此发票
 				b. 加入发票是否存在的提示
+	6. getbx:
+		ToDo:
+			1. 传入至少2个参数: bxuuid 和ownerid(或者toid)
+			2. 返回bxuuid的详细信息
+			3.可能需要做的一些检查
+				a.权限问题
 
 
 ATTENTION：
