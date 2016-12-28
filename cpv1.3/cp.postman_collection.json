@@ -38,7 +38,7 @@
 			"name": "getbill",
 			"description": "",
 			"collectionId": "6b9c4e92-79ab-448e-102f-f98565ca532b",
-			"rawModeData": "{\r\n  \"jsonrpc\": \"2.0\",\r\n  \"method\": \"query\",\r\n  \"params\": {\r\n    \"type\": 1,\r\n    \"chaincodeID\": {\r\n      \"name\": \"mycc\"\r\n    },\r\n    \"ctorMsg\": {\r\n      \"function\": \"getIvoice\",\r\n      \"args\": [\r\n        \"00003\", \"PKU\"\r\n      ]\r\n    },\r\n    \"secureContext\": \"jim\"\r\n  },\r\n  \"id\": 3\r\n}"
+			"rawModeData": "{\r\n  \"jsonrpc\": \"2.0\",\r\n  \"method\": \"query\",\r\n  \"params\": {\r\n    \"type\": 1,\r\n    \"chaincodeID\": {\r\n      \"name\": \"mycc\"\r\n    },\r\n    \"ctorMsg\": {\r\n      \"function\": \"getInvoice\",\r\n      \"args\": [\r\n        \"00003\", \"PKU\"\r\n      ]\r\n    },\r\n    \"secureContext\": \"jim\"\r\n  },\r\n  \"id\": 3\r\n}"
 		},
 		{
 			"id": "532050b6-3d79-0863-6434-34d2ca240987",

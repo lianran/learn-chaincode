@@ -1,3 +1,42 @@
+存储键值对包括：
+	1. 发票基本数据 A：
+		（uuid, fromid1 + toid2 + history3 + owner4 + status5 + createtm6 + submittm7 + confirmtm8 + bxid9）
+			uuid:发票id
+			fromid: 开票方
+			toid：收票方
+			history:流转历史，创建时为开票方
+			owner：发票拥有者，创建时为开票方
+			status：存储发票的状态
+				0：新创建发票，还未经过流转
+				1：流转中发票
+				2：报销中发票
+				3：报销完成发票
+			createtm: 发票的创建时间 timestamp
+			submittm: 提交报销时间（初始为0）
+			confirmtm：确认报销时间 （初始为0）
+			bxid：报销的编号 （初始为0）
+	2. 发票metadata信息 B：
+		（uuid+"md",metadata）
+			uuid: 发票id
+			metadata: 数据，传入什么存什么
+	3. 开票方记录 C：
+		（fromid+timestamp+uuid, timestamp）
+	4. 收票方记录 D：
+		（toid+timestamp+uuid, timestamp）
+	5. 流转历史记录 E
+		（ownerid + uuid, timestamp）
+			owerid: 现发票拥有方
+			uuid：发票id
+			timestamp：流转时间
+	6. 报销信息 F
+		(bxuuid, [uuid1, uuid2...] + owner + toid + endtm + bxinfo）
+			[]:发票编号数组
+    		ownerid： 申请人
+    		toid: 收票人
+    		endtm: 报销截止时间
+    		bxinfo：报销的详细信息
+
+
 一. init
 	doing nothing (也许可以添加一下限制之内的东西在此处)
 二. invoke
@@ -5,28 +44,10 @@
 		Done:
 			1. 传入至4个参数:uuid、fromid和toid，timestamp其中metadata是可选内容。
 			2. 数据：
-				存入发票基本信息（uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
-					uuid:发票id
-					fromid: 开票方
-					toid：收票方
-					history:流转历史，创建时为开票方
-					owner：发票拥有者，创建时为开票方
-					status：存储发票的状态
-						0：新创建发票，还未经过流转
-						1：流转中发票
-						2：报销中发票
-						3：报销完成发票
-					createtm: 发票的创建时间 timestamp
-					submittm: 提交报销时间（初始为0）
-					confirmtm：确认报销时间 （初始为0）
-					bxid：报销的编号 （初始为0）
-				存入发票metadata信息 （uuid+"md",metadata）
-					uuid: 发票id
-					metadata: 数据，传入什么存什么
-				存入开票方记录：
-					（fromid+timestamp+uuid, timestamp）
-				存入收票方记录：
-					（toid+timestamp+uuid, timestamp）
+				存入发票基本信息 A
+				存入发票metadata信息 B
+				存入开票方记录 C
+				存入收票方记录 D
 			3. 可能需要做一些必要的检查
 				a. fromid != toid
 				b. 可能需要在创建发票的时候检查发票是否已经存在
@@ -36,14 +57,11 @@
 		Done:
 			1. 传入四个参数：uuid、ownerid、toid和timestamp
 			2. 数据：
-				修改发票基本信息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
+				修改发票基本信息 A
 					（初次流转： 更改status状态为1）
 					history：追加",owner"信息
 					owner：更改
-				存入流转历史记录：（ownerid + uuid, timestamp）
-					owerid: 现发票拥有方
-					uuid：发票id
-					timestamp：流转时间
+				存入流转历史记录 E
 			3. 可能需要做的一些必要的检查
 				a. 是否为发票持有者进行转移 ownerid == owner(读出来的)
 				b. 是否何以流转 owner != toid
@@ -54,17 +72,12 @@
 		ToDo:
 			1. 传入至少7个参数：bxuuid、[uuid1,uuid2....]、owner、toid、timestamp和bxinfo、endtm
 			2. 数据：
-	        	循环数组修改发票基本消息 （uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid）
+	        	循环数组修改发票基本消息 A
 	        		(调用submit)
 					更改 status为2
 	        		更改 submittm为timestamp
 	        		更改 bxid为bxuuid
-	        	存入 (bxuuid, [uuid1, uuid2...] + owner + toid + endtm + bxinfo）
-	        		[]:发票编号数组
-	        		ownerid： 申请人
-	        		toid: 收票人
-	        		endtm: 报销截止时间
-	        		bxinfo：报销的详细信息
+	        	存入报销信息 F
 
 	      3. 可能需要做的一些检查
 				a. 是否为发票持有者进行报销 ownerid == owner
@@ -76,7 +89,7 @@
 		Done:
 			1. 传入至少三个参数bxuuid，收票方id和timestamp
 			2. 数据：
-				修改发票基本消息  (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid)
+				修改发票基本消息  A
 					（调用confirm）
 					更新 status为3
 					更新 history
@@ -89,11 +102,11 @@
 		Done:
 			1.传入至少四个参数bxuuid、收票方id、不可报销理由和timestamp
 			2. 数据：
-				修改发票基本信息 (uuid, fromid + toid + history + owner + status + createtm + submittm + confirmtm + bxid)
+				修改发票基本信息 A
 					(调用reject)
 					更新 status 为1
 					更新 confirmtm
-				修改报销信息 （bxuuid, [uuid1, uuid2...] + ownerid + toid + reason + bxinfo）
+				修改报销信息 F
 					更新 bxinfo追加reason
 			3.可能需要做的一些检查
 				a. 发票状态是否为待报销状态2
