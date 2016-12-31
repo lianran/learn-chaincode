@@ -385,7 +385,7 @@ func (t *myChaincode) confirmbx(stub shim.ChaincodeStubInterface, args []string)
     uuids := listvalue[0]
     //owner := listvalue[1]
     toid := listvalue[2]
-    endtm := listvalue[3]
+    //endtm := listvalue[3]
     //check for the endtm
     //intendtm, err := strconv.ParseInt(endtm, 10, 64)
     //if ts > intendtm {
