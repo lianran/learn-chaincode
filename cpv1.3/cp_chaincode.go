@@ -680,13 +680,21 @@ func (t *myChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []string
     }
     listValue := strings.Split(string(value), sp)
     // check the ownership
-    fromid := listValue[0]
+    //fromid := listValue[0]
     toid := listValue[1]
-    owner := listValue[3]
-    if _owner != owner && _owner != fromid && _owner != toid{
-        return []byte("you don't have the right to get this bill"), nil
+    history := listValue[2]
+    //owner := listValue[3]
+    listHistory := strings.Split(history,",")
+    flag := false
+    for _, val := range listHistory{
+        if _owner == val{
+            flag = true
+        }
     }
-    return value, nil
+    if flag || _owner == toid {
+        return value, nil
+    }
+    return []byte("you don't have the right to get this bill"), nil
 }
 
 func (t *myChaincode) getMetadata(stub shim.ChaincodeStubInterface, args []string) ([]byte, error){
@@ -707,11 +715,19 @@ func (t *myChaincode) getMetadata(stub shim.ChaincodeStubInterface, args []strin
     }
     listValue := strings.Split(string(value), sp)
     // check the ownership
-    fromid := listValue[0]
+    //fromid := listValue[0]
     toid := listValue[1]
-    owner := listValue[3]
-    if _owner != owner && _owner != fromid && _owner != toid{
-        return []byte("you don't have the right to get this bill"), nil
+    history := listValue[2]
+    //owner := listValue[3]
+    listHistory := strings.Split(history,",")
+    flag := false
+    for _, val := range listHistory{
+        if _owner == val{
+            flag = true
+        }
+    }
+    if flag != true && _owner == toid {
+        return []byte("you don't have the right to get the matedate of this bill"), nil
     }
     //get the metadata
     key = uuid + sp + "md"
@@ -739,23 +755,24 @@ func (t *myChaincode)getReimburseInfo(stub shim.ChaincodeStubInterface, args []s
         return []byte("don't have this bill"), nil
     }
     listValue := strings.Split(string(value), sp)
-    // check the ownership
-    fromid := listValue[0]
-    toid := listValue[1]
-    owner := listValue[3]
+    // get the bxid
     bxuuid := listValue[8]
-    if _owner != owner && _owner != fromid && _owner != toid{
-        return []byte("you don't have the right to get this bill"), nil
+    status := listValue[4]
+    if status == "0" || status == "1"{
+        return []byte("this invoice have not been reimbursed yet"), nil
     }
-    if bxuuid == "0"{
-        return []byte("this invoice has not been reimbursed yet "), nil
-    }
-
     //get the reimbuseinfo
     key = bxuuid
     value, err = stub.GetState(key)
     if err != nil {
         return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+    }
+    //check the right 
+    listValue = strings.Split(string(value), sp)
+    ownerid := listValue[1]
+    toid := listValue[2]
+    if ownerid != _owner && toid != _owner {
+        return []byte("you don't have the right to get the reimbuseinfo"), nil
     }
     return value, nil
 }
@@ -774,21 +791,14 @@ func (t *myChaincode)getbx(stub shim.ChaincodeStubInterface, args []string) ([]b
         return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
     }
     if value == nil {
-        return []byte("don't have this bill"), nil
+        return []byte("don't have this info"), nil
     }
     listValue := strings.Split(string(value), sp)
     // check the ownership
     owner := listValue[1]
     toid := listValue[2]
     if _owner != owner && _owner != toid{
-        return []byte("you don't have the right to get this bill"), nil
-    }
-
-    //get the reimbuseinfo
-    key = bxuuid
-    value, err = stub.GetState(key)
-    if err != nil {
-        return nil, fmt.Errorf("get operation failed. Error accessing state: %s", err)
+        return []byte("you don't have the right to get this info"), nil
     }
     return value, nil
 }
