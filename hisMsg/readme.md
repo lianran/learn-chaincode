@@ -1,23 +1,24 @@
 ##消息存证系统
-该智能合约将完成消息的存证和取证，所有的聊天记录的hash值按照用户接收和发送先后顺序，存证到区块链对应的db当中，从而方便后续的查询。另外，所有的消息的hash都被记录到了区块链上，db可以从该区块链上的交易记录进行恢复。
+该智能合约将完成消息的存证和取证，所有的聊天记录的hash值按照用户接收和发送先后顺序，存证到区块链对应的db当中，从而方便后续的查询。另外，所有消息的hash都被记录到了区块链上，db可以从该区块链上的交易记录进行恢复。
 ###存储内容
 --
-A. 聊天记录数据 （userId1 + msgId, "F"/"T" + userId2 + timestamp + msgHash) 
+A. 消息存证 （userId1 + msgId, "F"/"T" + userId2 + timestamp + msgHash) 
 	
 	userId: 用户id
-	msgId: 该条信息对应该用户的消息编号，采用自增的方式存储
+	msgId: 消息编号
 	F/T：F表示msg From userId2; T 表示msg Send To userId2
 	timestamp: 消息时间戳
 	msgHash: 消息Hash值
 		
-B. 用户消息数目记录 （userId, msgId)
+B. 用户消息数目 （userId, msgId)
 
 	userId： 用户id
-	msgId：用户现在的小心编号，采用自增的方式进行记录，实际上是用户相关消息的记数
+	msgId：用户当前的消息编号，采用自增的方式进行记录，实际上是用户相关消息的记数
 	
 ###chaincode接口设计
 --
-####存证 save   
+####存证 
+   
 存证是消息hash上链和存入是数据库的过程。  
 
 1. 传入参数
