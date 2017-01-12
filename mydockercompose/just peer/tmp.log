@@ -1,0 +1,385 @@
+Starting justpeer_baseimage_1
+Creating justpeer_vp5_1
+Attaching to justpeer_vp5_1, justpeer_baseimage_1
+[33mjustpeer_baseimage_1 exited with code 0
+[0m[36mvp5_1        |[0m [36m13:06:48.141 [logging] LoggingInit -> DEBU 001[0m Setting default logging level to DEBUG for command 'node'
+[36mvp5_1        |[0m 13:06:48.142 [peer] func1 -> INFO 002[0m Auto detected peer address: 172.18.0.4:7051
+[36mvp5_1        |[0m 13:06:48.143 [peer] func1 -> INFO 003[0m Auto detected peer address: 172.18.0.4:7051
+[36mvp5_1        |[0m [36m13:06:48.145 [eventhub_producer] AddEventType -> DEBU 004[0m registering BLOCK
+[36mvp5_1        |[0m [36m13:06:48.145 [eventhub_producer] AddEventType -> DEBU 005[0m registering CHAINCODE
+[36mvp5_1        |[0m [36m13:06:48.145 [eventhub_producer] AddEventType -> DEBU 006[0m registering REJECTION
+[36mvp5_1        |[0m [36m13:06:48.145 [eventhub_producer] AddEventType -> DEBU 007[0m registering REGISTER
+[36mvp5_1        |[0m 13:06:48.145 [nodeCmd] serve -> INFO 008[0m Security enabled status: false
+[36mvp5_1        |[0m 13:06:48.145 [nodeCmd] serve -> INFO 009[0m Privacy enabled status: false
+[36mvp5_1        |[0m 13:06:48.145 [eventhub_producer] start -> INFO 00a[0m event processor started
+[36mvp5_1        |[0m [36m13:06:48.145 [db] open -> DEBU 00b[0m Is db path [/var/hyperledger/production/db] empty [true]
+[36mvp5_1        |[0m 13:06:48.146 [db] open -> INFO 00c[0m Setting rocksdb maxLogFileSize to 10485760
+[36mvp5_1        |[0m 13:06:48.146 [db] open -> INFO 00d[0m Setting rocksdb keepLogFileNum to 10
+[36mvp5_1        |[0m 13:06:48.160 [chaincode] NewChaincodeSupport -> INFO 00e[0m Chaincode support using peerAddress: 172.18.0.4:7051
+[36mvp5_1        |[0m [36m13:06:48.160 [chaincode] NewChaincodeSupport -> DEBU 00f[0m Turn off keepalive(value 0)
+[36mvp5_1        |[0m 13:06:48.160 [sysccapi] RegisterSysCC -> INFO 010[0m system chaincode (noop,github.com/hyperledger/fabric/bddtests/syschaincode/noop) disabled
+[36mvp5_1        |[0m [36m13:06:48.160 [nodeCmd] serve -> DEBU 011[0m Running as validating peer - making genesis block if needed
+[36mvp5_1        |[0m 13:06:48.160 [state] loadConfig -> INFO 012[0m Loading configurations...
+[36mvp5_1        |[0m 13:06:48.161 [state] loadConfig -> INFO 013[0m Configurations loaded. stateImplName=[buckettree], stateImplConfigs=map[numBuckets:%!s(int=1000003) maxGroupingAtEachLevel:%!s(int=5) bucketCacheSize:%!s(int=100)], deltaHistorySize=[500]
+[36mvp5_1        |[0m 13:06:48.161 [state] NewState -> INFO 014[0m Initializing state implementation [buckettree]
+[36mvp5_1        |[0m 13:06:48.161 [buckettree] initConfig -> INFO 015[0m configs passed during initialization = map[string]interface {}{"numBuckets":1000003, "maxGroupingAtEachLevel":5, "bucketCacheSize":100}
+[36mvp5_1        |[0m 13:06:48.161 [buckettree] initConfig -> INFO 016[0m Initializing bucket tree state implemetation with configurations &{maxGroupingAtEachLevel:5 lowestLevel:9 levelToNumBucketsMap:map[7:40001 5:1601 1:3 0:1 4:321 8:200001 6:8001 3:65 2:13 9:1000003] hashFunc:0xab4dc0}
+[36mvp5_1        |[0m 13:06:48.161 [buckettree] newBucketCache -> INFO 017[0m Constructing bucket-cache with max bucket cache size = [100] MBs
+[36mvp5_1        |[0m 13:06:48.161 [buckettree] loadAllBucketNodesFromDB -> INFO 018[0m Loaded buckets data in cache. Total buckets in DB = [0]. Total cache size:=0
+[36mvp5_1        |[0m 13:06:48.161 [genesis] func1 -> INFO 019[0m Creating genesis block.
+[36mvp5_1        |[0m [36m13:06:48.161 [state] GetHash -> DEBU 01a[0m Enter - GetHash()
+[36mvp5_1        |[0m [36m13:06:48.161 [buckettree] ComputeCryptoHash -> DEBU 01b[0m Enter - ComputeCryptoHash()
+[36mvp5_1        |[0m [36m13:06:48.161 [buckettree] ComputeCryptoHash -> DEBU 01c[0m Returing existing crypto-hash as recomputation not required
+[36mvp5_1        |[0m [36m13:06:48.161 [state] GetHash -> DEBU 01d[0m Exit - GetHash()
+[36mvp5_1        |[0m [36m13:06:48.161 [indexes] addIndexDataForPersistence -> DEBU 01e[0m Indexing block number [0] by hash = [46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762fd75dc4ddd8c0f200cb05019d67b592f6fc821c49479ab48640292eacb3b7c4be]
+[36mvp5_1        |[0m [36m13:06:48.161 [state] AddChangesForPersistence -> DEBU 01f[0m state.addChangesForPersistence()...start
+[36mvp5_1        |[0m [36m13:06:48.162 [state] AddChangesForPersistence -> DEBU 020[0m Adding state-delta corresponding to block number[0]
+[36mvp5_1        |[0m [36m13:06:48.162 [state] AddChangesForPersistence -> DEBU 021[0m Not deleting previous state-delta. Block number [0] is smaller than historyStateDeltaSize [500]
+[36mvp5_1        |[0m [36m13:06:48.162 [state] AddChangesForPersistence -> DEBU 022[0m state.addChangesForPersistence()...finished
+[36mvp5_1        |[0m [36m13:06:48.162 [ledger] resetForNextTxGroup -> DEBU 023[0m resetting ledger state for next transaction batch
+[36mvp5_1        |[0m [36m13:06:48.162 [buckettree] ClearWorkingSet -> DEBU 024[0m Enter - ClearWorkingSet()
+[36mvp5_1        |[0m [36m13:06:48.162 [nodeCmd] serve -> DEBU 025[0m Running as validating peer - installing consensus 
+[36mvp5_1        |[0m [36m13:06:48.162 [peer] initDiscovery -> DEBU 026[0m Retrieved discovery list from disk: []
+[36mvp5_1        |[0m 13:06:48.163 [consensus/controller] NewConsenter -> INFO 027[0m Creating consensus plugin pbft
+[36mvp5_1        |[0m [36m13:06:48.163 [consensus/pbft] newObcBatch -> DEBU 028[0m Replica 5 obtaining startup information
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 029[0m PBFT type = *pbft.obcBatch
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02a[0m PBFT Max number of validating peers (N) = 4
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02b[0m PBFT Max number of failing peers (f) = 1
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02c[0m PBFT byzantine flag = false
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02d[0m PBFT request timeout = 2s
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02e[0m PBFT view change timeout = 2s
+[36mvp5_1        |[0m 13:06:48.164 [consensus/pbft] newPbftCore -> INFO 02f[0m PBFT Checkpoint period (K) = 10
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newPbftCore -> INFO 030[0m PBFT broadcast timeout = 1s
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newPbftCore -> INFO 031[0m PBFT Log multiplier = 4
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newPbftCore -> INFO 032[0m PBFT log size (L) = 40
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newPbftCore -> INFO 033[0m PBFT null requests disabled
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newPbftCore -> INFO 034[0m PBFT automatic view change disabled
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] restoreLastSeqNo -> INFO 035[0m Replica 5 restored lastExec: 0
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/pbft] moveWatermarks -> DEBU 036[0m Replica 5 updated low watermark to 0
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] restoreState -> INFO 037[0m Replica 5 restored state: view: 0, seqNo: 0, pset: 0, qset: 0, reqBatches: 0, chkpts: 1 h: 0
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/pbft] ProcessEvent -> DEBU 038[0m Replica 5 batch main thread looping
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/pbft] ProcessEvent -> DEBU 039[0m Replica 5 processing event
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/pbft] stateTransfer -> DEBU 03a[0m Replica 5 is out of sync, pending state transfer
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/handler] InvalidateState -> DEBU 03b[0m Invalidating the current state
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/pbft] retryStateTransfer -> DEBU 03c[0m Replica 5 is initiating state transfer to seqNo 0
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newObcBatch -> INFO 03d[0m PBFT Batch size = 2048
+[36mvp5_1        |[0m 13:06:48.165 [consensus/pbft] newObcBatch -> INFO 03e[0m PBFT Batch timeout = 1s
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/executor] ProcessEvent -> DEBU 040[0m Executor is processing a stateUpdateEvent
+[36mvp5_1        |[0m 13:06:48.166 [consensus/statetransfer] SyncToTarget -> INFO 041[0m Syncing to target 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762fd75dc4ddd8c0f200cb05019d67b592f6fc821c49479ab48640292eacb3b7c4be for block number 0 with peers []
+[36mvp5_1        |[0m [36m13:06:48.166 [peer] chatWithPeer -> DEBU 042[0m Initiating Chat with peer address: 10.0.2.53:7051
+[36mvp5_1        |[0m [36m13:06:48.165 [consensus/handler] 1 -> DEBU 03f[0m Starting up message thread for consenter
+[36mvp5_1        |[0m 13:06:48.166 [nodeCmd] serve -> INFO 043[0m Starting peer with ID=name:"vp5" , network ID=dev, address=172.18.0.4:7051, rootnodes=10.0.2.53:7051, validator=true
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] verifyAndRecoverBlockchain -> DEBU 044[0m Validating existing blockchain, highest validated block is 0, valid through 0
+[36mvp5_1        |[0m 13:06:48.166 [consensus/statetransfer] blockThread -> INFO 045[0m Validated blockchain to the genesis block
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] syncBlockchainToTarget -> DEBU 046[0m Processing a blockSyncReq to block 0 through 0
+[36mvp5_1        |[0m 13:06:48.166 [rest] StartOpenchainRESTServer -> INFO 047[0m Initializing the REST service on 0.0.0.0:7050, TLS is disabled.
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] syncBlockchainToTarget -> DEBU 048[0m Skipped remote syncing of block 0 through 0 because they were already present and valid
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] syncBlockchainToTarget -> DEBU 049[0m Replying to blockSyncReq on reply channel with : %!s(<nil>)
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] attemptStateTransfer -> DEBU 04a[0m State transfer thread waiting for block sync to complete
+[36mvp5_1        |[0m [36m13:06:48.166 [consensus/statetransfer] attemptStateTransfer -> DEBU 04b[0m State transfer thread continuing
+[36mvp5_1        |[0m [36m13:06:48.166 [state] GetHash -> DEBU 04c[0m Enter - GetHash()
+[36mvp5_1        |[0m [36m13:06:48.166 [buckettree] ComputeCryptoHash -> DEBU 04d[0m Enter - ComputeCryptoHash()
+[36mvp5_1        |[0m [36m13:06:48.166 [buckettree] ComputeCryptoHash -> DEBU 04e[0m Returing existing crypto-hash as recomputation not required
+[36mvp5_1        |[0m [36m13:06:48.167 [state] GetHash -> DEBU 04f[0m Exit - GetHash()
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/statetransfer] attemptStateTransfer -> DEBU 050[0m State is now valid at block 0 and hash 
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/statetransfer] SyncToTarget -> DEBU 051[0m Sync to target 46b9dd2b0ba88d13233b3feb743eeb243fcd52ea62b81b82b50c27646ed5762fd75dc4ddd8c0f200cb05019d67b592f6fc821c49479ab48640292eacb3b7c4be for block number 0 returned, now at block height 1 with err=<nil> recoverable=true
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/executor] ProcessEvent -> DEBU 053[0m State transfer sync completed, returning
+[36mvp5_1        |[0m [36m13:06:48.167 [peer] ensureConnected -> DEBU 052[0m Starting Peer reconnect service (touch service), with period = 1m1s
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] ProcessEvent -> DEBU 054[0m Replica 5 batch main thread looping
+[36mvp5_1        |[0m [36m13:06:48.167 [peer] chatWithPeer -> DEBU 055[0m Established Chat with peer address: 10.0.2.53:7051
+[36mvp5_1        |[0m [36m13:06:48.167 [peer] handleChat -> DEBU 057[0m Current context deadline = 0001-01-01 00:00:00 +0000 UTC, ok = false
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/statetransfer] verifyAndRecoverBlockchain -> DEBU 058[0m Validating existing blockchain, highest validated block is 0, valid through 0
+[36mvp5_1        |[0m 13:06:48.167 [consensus/statetransfer] blockThread -> INFO 059[0m Validated blockchain to the genesis block
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] ProcessEvent -> DEBU 056[0m Replica 5 processing event
+[36mvp5_1        |[0m 13:06:48.167 [consensus/pbft] ProcessEvent -> INFO 05a[0m Replica 5 application caught up via state transfer, lastExec now 0
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] moveWatermarks -> DEBU 05b[0m Replica 5 updated low watermark to 0
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/handler] ValidateState -> DEBU 05c[0m Validating the current state
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] Checkpoint -> DEBU 05d[0m Replica 5 preparing checkpoint for view=0/seqNo=0 and b64 id of CAESQEa53SsLqI0TIzs/63Q+6yQ/zVLqYrgbgrUMJ2Ru1XYv113E3djA8gDLBQGdZ7WS9vyCHElHmrSGQCkurLO3xL4=
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] recvCheckpoint -> DEBU 05e[0m Replica 5 received checkpoint from replica 5, seqNo 0, digest CAESQEa53SsLqI0TIzs/63Q+6yQ/zVLqYrgbgrUMJ2Ru1XYv113E3djA8gDLBQGdZ7WS9vyCHElHmrSGQCkurLO3xL4=
+[36mvp5_1        |[0m [36m13:06:48.167 [consensus/pbft] recvCheckpoint -> DEBU 05f[0m Checkpoint sequence number outside watermarks: seqNo 0, low-mark 0
+[36mvp5_1        |[0m [36m13:06:48.168 [consensus/pbft] executeOutstanding -> DEBU 061[0m Replica 5 attempting to executeOutstanding
+[36mvp5_1        |[0m [36m13:06:48.168 [peer] SendMessage -> DEBU 060[0m Sending message to stream of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:06:48.168 [consensus/pbft] executeOutstanding -> DEBU 062[0m Replica 5 certstore map[]
+[36mvp5_1        |[0m [36m13:06:48.170 [consensus/handler] HandleMessage -> DEBU 063[0m Did not handle message of type DISC_HELLO, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] HandleMessage -> DEBU 064[0m Handling Message of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] beforeHello -> DEBU 065[0m Received DISC_HELLO, parsing out Peer identification
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] beforeHello -> DEBU 066[0m Received DISC_HELLO from endpoint=peerEndpoint:<ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR > blockchainInfo:<height:8 currentBlockHash:">\317qM\373`5\231\210\274\376\301\225\034\346C\334\241-\363\375E\247 \304\231/\014\324\370\220!\322\235\212\345\216\300\272\223\322\211\237U\270\206\250\310\205\315\204,\tDTsaT\374\267d\036\000A" previousBlockHash:"g\007M\347Jh\367\n\1771\213\302\342\275\033\324^\220\1773\245\250\317?\357\255\277N'\207>\316jH\273KSf\372\216g\206\247<\206y2\226\027\304\305\361\017\225\2229Bt\003\353I\220>d" > 
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] RegisterHandler -> DEBU 067[0m registered handler with key: name:"vp0" 
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] enterState -> DEBU 068[0m The Peer's bi-directional stream to ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR  is established, from event DISC_HELLO
+[36mvp5_1        |[0m [36m13:06:48.170 [peer] start -> DEBU 069[0m Starting Peer discovery service
+[36mvp5_1        |[0m [36m13:07:15.004 [peer] handleChat -> DEBU 06a[0m Current context deadline = 0001-01-01 00:00:00 +0000 UTC, ok = false
+[36mvp5_1        |[0m [36m13:07:15.005 [consensus/handler] HandleMessage -> DEBU 06b[0m Did not handle message of type DISC_HELLO, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:07:15.005 [peer] HandleMessage -> DEBU 06c[0m Handling Message of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:07:15.005 [peer] beforeHello -> DEBU 06d[0m Received DISC_HELLO, parsing out Peer identification
+[36mvp5_1        |[0m [36m13:07:15.005 [peer] beforeHello -> DEBU 06e[0m Received DISC_HELLO from endpoint=peerEndpoint:<ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR > blockchainInfo:<height:8 currentBlockHash:">\317qM\373`5\231\210\274\376\301\225\034\346C\334\241-\363\375E\247 \304\231/\014\324\370\220!\322\235\212\345\216\300\272\223\322\211\237U\270\206\250\310\205\315\204,\tDTsaT\374\267d\036\000A" previousBlockHash:"g\007M\347Jh\367\n\1771\213\302\342\275\033\324^\220\1773\245\250\317?\357\255\277N'\207>\316jH\273KSf\372\216g\206\247<\206y2\226\027\304\305\361\017\225\2229Bt\003\353I\220>d" > 
+[36mvp5_1        |[0m [36m13:07:15.005 [peer] beforeHello -> DEBU 06f[0m Received DISC_HELLO, sending back DISC_HELLO
+[36mvp5_1        |[0m [36m13:07:15.006 [peer] SendMessage -> DEBU 070[0m Sending message to stream of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:07:15.006 [peer] RegisterHandler -> DEBU 071[0m registered handler with key: name:"vp3" 
+[36mvp5_1        |[0m [36m13:07:15.006 [peer] enterState -> DEBU 072[0m The Peer's bi-directional stream to ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR  is established, from event DISC_HELLO
+[36mvp5_1        |[0m [36m13:07:15.006 [peer] start -> DEBU 073[0m Starting Peer discovery service
+[36mvp5_1        |[0m [36m13:07:48.170 [consensus/handler] HandleMessage -> DEBU 074[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:07:48.170 [peer] HandleMessage -> DEBU 075[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:07:48.170 [peer] SendMessage -> DEBU 076[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:07:48.170 [peer] beforeGetPeers -> DEBU 077[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:07:48.170 [peer] SendMessage -> DEBU 078[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:07:48.171 [consensus/handler] HandleMessage -> DEBU 079[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:07:48.171 [peer] HandleMessage -> DEBU 07a[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:07:48.171 [peer] beforePeers -> DEBU 07b[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:07:48.171 [peer] beforePeers -> DEBU 07c[0m Received PeersMessage with Peers: peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:07:49.167 [peer] ensureConnected -> DEBU 07d[0m Touch service indicates no dropped connections
+[36mvp5_1        |[0m [36m13:07:49.167 [peer] ensureConnected -> DEBU 07e[0m Connected to: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:07:49.167 [peer] ensureConnected -> DEBU 07f[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:08:15.006 [peer] SendMessage -> DEBU 080[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:08:15.007 [consensus/handler] HandleMessage -> DEBU 081[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] HandleMessage -> DEBU 082[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] beforeGetPeers -> DEBU 083[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] SendMessage -> DEBU 084[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:08:15.007 [consensus/handler] HandleMessage -> DEBU 085[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] HandleMessage -> DEBU 086[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] beforePeers -> DEBU 087[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:08:15.007 [peer] beforePeers -> DEBU 088[0m Received PeersMessage with Peers: peers:<ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR > peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:08:48.170 [consensus/handler] HandleMessage -> DEBU 089[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:08:48.170 [peer] HandleMessage -> DEBU 08a[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:08:48.170 [peer] beforeGetPeers -> DEBU 08b[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:08:48.170 [peer] SendMessage -> DEBU 08c[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:08:48.170 [peer] SendMessage -> DEBU 08d[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:08:48.171 [consensus/handler] HandleMessage -> DEBU 08e[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:08:48.171 [peer] HandleMessage -> DEBU 08f[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:08:48.171 [peer] beforePeers -> DEBU 090[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:08:48.171 [peer] beforePeers -> DEBU 091[0m Received PeersMessage with Peers: peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:08:50.167 [peer] ensureConnected -> DEBU 092[0m Touch service indicates no dropped connections
+[36mvp5_1        |[0m [36m13:08:50.167 [peer] ensureConnected -> DEBU 093[0m Connected to: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:08:50.167 [peer] ensureConnected -> DEBU 094[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:09:15.006 [peer] SendMessage -> DEBU 095[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:09:15.006 [consensus/handler] HandleMessage -> DEBU 096[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:09:15.006 [peer] HandleMessage -> DEBU 097[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:09:15.007 [peer] beforeGetPeers -> DEBU 098[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:09:15.007 [peer] SendMessage -> DEBU 099[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:09:15.007 [consensus/handler] HandleMessage -> DEBU 09a[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:09:15.007 [peer] HandleMessage -> DEBU 09b[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:09:15.007 [peer] beforePeers -> DEBU 09c[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:09:15.007 [peer] beforePeers -> DEBU 09d[0m Received PeersMessage with Peers: peers:<ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR > peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:09:48.170 [consensus/handler] HandleMessage -> DEBU 09e[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:09:48.170 [peer] SendMessage -> DEBU 09f[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:09:48.170 [peer] HandleMessage -> DEBU 0a0[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:09:48.170 [peer] beforeGetPeers -> DEBU 0a1[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:09:48.170 [peer] SendMessage -> DEBU 0a2[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:09:48.171 [consensus/handler] HandleMessage -> DEBU 0a3[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:09:48.171 [peer] HandleMessage -> DEBU 0a4[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:09:48.171 [peer] beforePeers -> DEBU 0a5[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:09:48.171 [peer] beforePeers -> DEBU 0a6[0m Received PeersMessage with Peers: peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:09:51.167 [peer] ensureConnected -> DEBU 0a7[0m Touch service indicates no dropped connections
+[36mvp5_1        |[0m [36m13:09:51.167 [peer] ensureConnected -> DEBU 0a8[0m Connected to: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:09:51.167 [peer] ensureConnected -> DEBU 0a9[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:10:15.006 [peer] SendMessage -> DEBU 0aa[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:10:15.006 [consensus/handler] HandleMessage -> DEBU 0ab[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] HandleMessage -> DEBU 0ac[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] beforeGetPeers -> DEBU 0ad[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] SendMessage -> DEBU 0ae[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:10:15.007 [consensus/handler] HandleMessage -> DEBU 0af[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] HandleMessage -> DEBU 0b0[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] beforePeers -> DEBU 0b1[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:10:15.007 [peer] beforePeers -> DEBU 0b2[0m Received PeersMessage with Peers: peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:10:48.170 [consensus/handler] HandleMessage -> DEBU 0b3[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:10:48.170 [peer] HandleMessage -> DEBU 0b5[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:10:48.170 [peer] beforeGetPeers -> DEBU 0b6[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:10:48.170 [peer] SendMessage -> DEBU 0b4[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:10:48.170 [peer] SendMessage -> DEBU 0b7[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:10:48.171 [consensus/handler] HandleMessage -> DEBU 0b8[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:10:48.171 [peer] HandleMessage -> DEBU 0b9[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:10:48.171 [peer] beforePeers -> DEBU 0ba[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:10:48.171 [peer] beforePeers -> DEBU 0bb[0m Received PeersMessage with Peers: peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp3" > address:"172.18.0.5:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [36m13:10:52.167 [peer] ensureConnected -> DEBU 0bc[0m Touch service indicates no dropped connections
+[36mvp5_1        |[0m [36m13:10:52.167 [peer] ensureConnected -> DEBU 0bd[0m Connected to: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:10:52.167 [peer] ensureConnected -> DEBU 0be[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:11:15.006 [peer] SendMessage -> DEBU 0bf[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:11:15.006 [consensus/handler] HandleMessage -> DEBU 0c0[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:11:15.006 [peer] HandleMessage -> DEBU 0c1[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:11:15.007 [peer] beforeGetPeers -> DEBU 0c2[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:11:15.007 [peer] SendMessage -> DEBU 0c3[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:11:15.007 [consensus/handler] HandleMessage -> DEBU 0c4[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:11:15.007 [peer] HandleMessage -> DEBU 0c5[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:11:15.007 [peer] beforePeers -> DEBU 0c6[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:11:15.007 [peer] beforePeers -> DEBU 0c7[0m Received PeersMessage with Peers: peers:<ID:<name:"vp0" > address:"172.18.0.3:7051" type:VALIDATOR > peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [31m13:11:17.709 [peer] handleChat -> ERRO 0c8[0m Error during Chat, stopping handler: stream error: code = 1 desc = "context canceled"
+[36mvp5_1        |[0m [36m13:11:17.709 [peer] DeregisterHandler -> DEBU 0c9[0m Deregistered handler with key: name:"vp3" 
+[36mvp5_1        |[0m [36m13:11:17.709 [peer] start -> DEBU 0ca[0m Stopping discovery service
+[36mvp5_1        |[0m 2017/01/12 13:11:17 transport: http2Client.notifyError got notified that the client transport was broken EOF.
+[36mvp5_1        |[0m [31m13:11:17.710 [peer] handleChat -> ERRO 0cb[0m Error during Chat, stopping handler: rpc error: code = 13 desc = transport is closing
+[36mvp5_1        |[0m [36m13:11:17.710 [peer] DeregisterHandler -> DEBU 0cc[0m Deregistered handler with key: name:"vp0" 
+[36mvp5_1        |[0m [31m13:11:17.710 [peer] chatWithPeer -> ERRO 0cd[0m Ending Chat with peer address 10.0.2.53:7051 due to error: Error during Chat, stopping handler: rpc error: code = 13 desc = transport is closing
+[36mvp5_1        |[0m [36m13:11:17.710 [peer] start -> DEBU 0ce[0m Stopping discovery service
+[36mvp5_1        |[0m 2017/01/12 13:11:17 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:58950->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:11:17 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:58956->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:11:17 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:58960->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:11:17 transport: http2Client.notifyError got notified that the client transport was broken EOF.
+[36mvp5_1        |[0m 2017/01/12 13:11:18 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:58964->10.0.2.53:7051: write: broken pipe"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:11:20 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:11:23 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:11:27 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:11:34 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:11:44 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m [33m13:11:53.167 [peer] ensureConnected -> WARN 0cf[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:11:53.167 [peer] ensureConnected -> DEBU 0d0[0m Connected to: []
+[36mvp5_1        |[0m [36m13:11:53.167 [peer] ensureConnected -> DEBU 0d2[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:11:53.167 [peer] chatWithPeer -> DEBU 0d1[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [36m13:11:53.167 [peer] chatWithPeer -> DEBU 0d3[0m Initiating Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [31m13:11:56.167 [peer] chatWithPeer -> ERRO 0d4[0m Error creating connection to peer address 172.18.0.5:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m [31m13:11:56.167 [peer] chatWithPeer -> ERRO 0d5[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:12:02 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:12:24 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m [33m13:12:54.167 [peer] ensureConnected -> WARN 0d6[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:12:54.167 [peer] ensureConnected -> DEBU 0d7[0m Connected to: []
+[36mvp5_1        |[0m [36m13:12:54.167 [peer] ensureConnected -> DEBU 0d9[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:12:54.167 [peer] chatWithPeer -> DEBU 0da[0m Initiating Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [36m13:12:54.167 [peer] chatWithPeer -> DEBU 0d8[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [31m13:12:57.167 [peer] chatWithPeer -> ERRO 0db[0m Error creating connection to peer address 172.18.0.5:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m [31m13:12:57.167 [peer] chatWithPeer -> ERRO 0dc[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:13:01 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m [33m13:13:55.167 [peer] ensureConnected -> WARN 0dd[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:13:55.167 [peer] ensureConnected -> DEBU 0de[0m Connected to: []
+[36mvp5_1        |[0m [36m13:13:55.167 [peer] ensureConnected -> DEBU 0e0[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:13:55.167 [peer] chatWithPeer -> DEBU 0df[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [36m13:13:55.167 [peer] chatWithPeer -> DEBU 0e1[0m Initiating Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [31m13:13:58.167 [peer] chatWithPeer -> ERRO 0e2[0m Error creating connection to peer address 172.18.0.5:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m [31m13:13:58.167 [peer] chatWithPeer -> ERRO 0e3[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:13:59 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m [33m13:14:56.167 [peer] ensureConnected -> WARN 0e4[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:14:56.167 [peer] ensureConnected -> DEBU 0e5[0m Connected to: []
+[36mvp5_1        |[0m [36m13:14:56.167 [peer] ensureConnected -> DEBU 0e7[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051]
+[36mvp5_1        |[0m [36m13:14:56.167 [peer] chatWithPeer -> DEBU 0e6[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [36m13:14:56.167 [peer] chatWithPeer -> DEBU 0e8[0m Initiating Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [31m13:14:59.167 [peer] chatWithPeer -> ERRO 0e9[0m Error creating connection to peer address 172.18.0.5:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m [31m13:14:59.167 [peer] chatWithPeer -> ERRO 0ea[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:15:40 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 10.0.2.53:7051: getsockopt: connection refused"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59008->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59012->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59016->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59020->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59024->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59028->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59032->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59036->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:40 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59040->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:41 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:59044->10.0.2.53:7051: write: broken pipe"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:41 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59048->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:41 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59052->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:41 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59056->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:41 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59060->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:41 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59064->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:59068->10.0.2.53:7051: write: connection reset by peer"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59072->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59076->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59080->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59084->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59088->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:42 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59092->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:59096->10.0.2.53:7051: write: connection reset by peer"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59100->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59104->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59108->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59112->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59116->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59120->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59124->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59128->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59132->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59136->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59140->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59144->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:43 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59148->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:59152->10.0.2.53:7051: write: broken pipe"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59156->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59160->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59164->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59168->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59172->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59176->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59180->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59184->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59188->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59192->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59196->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59200->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59204->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59208->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59212->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59216->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59220->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59224->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59228->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59232->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59236->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59240->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59244->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59248->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59252->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59256->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59260->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59264->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59268->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59272->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59276->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59280->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59284->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59288->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:44 transport: http2Client.notifyError got notified that the client transport was broken read tcp 172.18.0.4:59292->10.0.2.53:7051: read: connection reset by peer.
+[36mvp5_1        |[0m 2017/01/12 13:15:45 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: write tcp 172.18.0.4:59296->10.0.2.53:7051: write: connection reset by peer"; Reconnecting to {"10.0.2.53:7051" <nil>}
+[36mvp5_1        |[0m [33m13:15:57.167 [peer] ensureConnected -> WARN 0eb[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:15:57.167 [peer] ensureConnected -> DEBU 0ec[0m Connected to: []
+[36mvp5_1        |[0m [36m13:15:57.167 [peer] chatWithPeer -> DEBU 0ed[0m Initiating Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [36m13:15:57.167 [peer] ensureConnected -> DEBU 0ee[0m Discovery knows about: [172.18.0.5:7051 172.18.0.3:7051]
+[36mvp5_1        |[0m [36m13:15:57.167 [peer] chatWithPeer -> DEBU 0ef[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [36m13:15:57.170 [peer] chatWithPeer -> DEBU 0f0[0m Established Chat with peer address: 172.18.0.5:7051
+[36mvp5_1        |[0m [36m13:15:57.170 [peer] handleChat -> DEBU 0f1[0m Current context deadline = 0001-01-01 00:00:00 +0000 UTC, ok = false
+[36mvp5_1        |[0m [36m13:15:57.170 [peer] SendMessage -> DEBU 0f2[0m Sending message to stream of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:15:57.171 [consensus/handler] HandleMessage -> DEBU 0f3[0m Did not handle message of type DISC_HELLO, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:15:57.171 [peer] HandleMessage -> DEBU 0f4[0m Handling Message of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:15:57.171 [peer] beforeHello -> DEBU 0f5[0m Received DISC_HELLO, parsing out Peer identification
+[36mvp5_1        |[0m [36m13:15:57.171 [peer] beforeHello -> DEBU 0f6[0m Received DISC_HELLO from endpoint=peerEndpoint:<ID:<name:"vp1" > address:"172.18.0.5:7051" type:VALIDATOR > blockchainInfo:<height:1 currentBlockHash:"F\271\335+\013\250\215\023#;?\353t>\353$?\315R\352b\270\033\202\265\014'dn\325v/\327]\304\335\330\300\362\000\313\005\001\235g\265\222\366\374\202\034IG\232\264\206@).\254\263\267\304\276" > 
+[36mvp5_1        |[0m [36m13:15:57.171 [peer] RegisterHandler -> DEBU 0f7[0m registered handler with key: name:"vp1" 
+[36mvp5_1        |[0m [36m13:15:57.171 [peer] enterState -> DEBU 0f8[0m The Peer's bi-directional stream to ID:<name:"vp1" > address:"172.18.0.5:7051" type:VALIDATOR  is established, from event DISC_HELLO
+[36mvp5_1        |[0m [36m13:15:57.172 [peer] start -> DEBU 0f9[0m Starting Peer discovery service
+[36mvp5_1        |[0m 2017/01/12 13:15:58 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:15:59 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mvp5_1        |[0m [31m13:16:00.167 [peer] chatWithPeer -> ERRO 0fa[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:16:00 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mvp5_1        |[0m [36m13:16:45.654 [peer] handleChat -> DEBU 0fb[0m Current context deadline = 0001-01-01 00:00:00 +0000 UTC, ok = false
+[36mvp5_1        |[0m [36m13:16:45.655 [consensus/handler] HandleMessage -> DEBU 0fc[0m Did not handle message of type DISC_HELLO, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] HandleMessage -> DEBU 0fd[0m Handling Message of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] beforeHello -> DEBU 0fe[0m Received DISC_HELLO, parsing out Peer identification
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] beforeHello -> DEBU 0ff[0m Received DISC_HELLO from endpoint=peerEndpoint:<ID:<name:"vp0" > address:"172.18.0.2:7051" type:VALIDATOR > blockchainInfo:<height:1 currentBlockHash:"F\271\335+\013\250\215\023#;?\353t>\353$?\315R\352b\270\033\202\265\014'dn\325v/\327]\304\335\330\300\362\000\313\005\001\235g\265\222\366\374\202\034IG\232\264\206@).\254\263\267\304\276" > 
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] beforeHello -> DEBU 100[0m Received DISC_HELLO, sending back DISC_HELLO
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] SendMessage -> DEBU 101[0m Sending message to stream of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] RegisterHandler -> DEBU 102[0m registered handler with key: name:"vp0" 
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] enterState -> DEBU 103[0m The Peer's bi-directional stream to ID:<name:"vp0" > address:"172.18.0.2:7051" type:VALIDATOR  is established, from event DISC_HELLO
+[36mvp5_1        |[0m [36m13:16:45.655 [peer] start -> DEBU 104[0m Starting Peer discovery service
+[36mvp5_1        |[0m [36m13:16:46.030 [peer] handleChat -> DEBU 105[0m Current context deadline = 0001-01-01 00:00:00 +0000 UTC, ok = false
+[36mvp5_1        |[0m [36m13:16:46.031 [consensus/handler] HandleMessage -> DEBU 106[0m Did not handle message of type DISC_HELLO, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] HandleMessage -> DEBU 107[0m Handling Message of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] beforeHello -> DEBU 108[0m Received DISC_HELLO, parsing out Peer identification
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] beforeHello -> DEBU 109[0m Received DISC_HELLO from endpoint=peerEndpoint:<ID:<name:"vp2" > address:"172.18.0.6:7051" type:VALIDATOR > blockchainInfo:<height:1 currentBlockHash:"F\271\335+\013\250\215\023#;?\353t>\353$?\315R\352b\270\033\202\265\014'dn\325v/\327]\304\335\330\300\362\000\313\005\001\235g\265\222\366\374\202\034IG\232\264\206@).\254\263\267\304\276" > 
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] beforeHello -> DEBU 10a[0m Received DISC_HELLO, sending back DISC_HELLO
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] SendMessage -> DEBU 10b[0m Sending message to stream of type: DISC_HELLO 
+[36mvp5_1        |[0m [36m13:16:46.031 [peer] RegisterHandler -> DEBU 10c[0m registered handler with key: name:"vp2" 
+[36mvp5_1        |[0m [36m13:16:46.032 [peer] enterState -> DEBU 10d[0m The Peer's bi-directional stream to ID:<name:"vp2" > address:"172.18.0.6:7051" type:VALIDATOR  is established, from event DISC_HELLO
+[36mvp5_1        |[0m [36m13:16:46.032 [peer] start -> DEBU 10e[0m Starting Peer discovery service
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] SendMessage -> DEBU 10f[0m Sending message to stream of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:16:57.172 [consensus/handler] HandleMessage -> DEBU 110[0m Did not handle message of type DISC_GET_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] HandleMessage -> DEBU 111[0m Handling Message of type: DISC_GET_PEERS 
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] beforeGetPeers -> DEBU 112[0m Sending back DISC_PEERS
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] SendMessage -> DEBU 113[0m Sending message to stream of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:16:57.172 [consensus/handler] HandleMessage -> DEBU 114[0m Did not handle message of type DISC_PEERS, passing on to next MessageHandler
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] HandleMessage -> DEBU 115[0m Handling Message of type: DISC_PEERS 
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] beforePeers -> DEBU 116[0m Received DISC_PEERS, grabbing peers message
+[36mvp5_1        |[0m [36m13:16:57.172 [peer] beforePeers -> DEBU 117[0m Received PeersMessage with Peers: peers:<ID:<name:"vp0" > address:"172.18.0.2:7051" type:VALIDATOR > peers:<ID:<name:"vp5" > address:"172.18.0.4:7051" type:VALIDATOR > peers:<ID:<name:"vp2" > address:"172.18.0.6:7051" type:VALIDATOR > 
+[36mvp5_1        |[0m [33m13:16:58.167 [peer] ensureConnected -> WARN 118[0m Touch service indicates dropped connections, attempting to reconnect...
+[36mvp5_1        |[0m [36m13:16:58.167 [peer] chatWithPeer -> DEBU 11a[0m Initiating Chat with peer address: 172.18.0.3:7051
+[36mvp5_1        |[0m [36m13:16:58.167 [peer] ensureConnected -> DEBU 119[0m Connected to: [172.18.0.5:7051 172.18.0.2:7051 172.18.0.6:7051]
+[36mvp5_1        |[0m [36m13:16:58.167 [peer] ensureConnected -> DEBU 11b[0m Discovery knows about: [172.18.0.3:7051 172.18.0.5:7051 172.18.0.2:7051 172.18.0.6:7051]
+[36mvp5_1        |[0m 2017/01/12 13:16:59 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mvp5_1        |[0m 2017/01/12 13:17:00 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mvp5_1        |[0m [31m13:17:01.167 [peer] chatWithPeer -> ERRO 11c[0m Error creating connection to peer address 172.18.0.3:7051: grpc: timed out when dialing
+[36mvp5_1        |[0m 2017/01/12 13:17:01 grpc: addrConn.resetTransport failed to create client transport: connection error: desc = "transport: dial tcp 172.18.0.3:7051: getsockopt: connection refused"; Reconnecting to {"172.18.0.3:7051" <nil>}
+[36mjustpeer_vp5_1 exited with code 137
+[0m
