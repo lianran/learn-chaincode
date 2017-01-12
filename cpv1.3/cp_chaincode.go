@@ -488,11 +488,11 @@ func (t *myChaincode) rejectbx(stub shim.ChaincodeStubInterface, args []string) 
     endtm := listvalue[3]
     bxinfo := listvalue[4]
     //check for the endtm
-    intendtm, err := strconv.ParseInt(endtm, 10, 64)
-    if ts > intendtm {
-        //ToDo: reject it ?
-        return nil, fmt.Errorf("out of the bx time")
-    }
+    // intendtm, err := strconv.ParseInt(endtm, 10, 64)
+    // if ts > intendtm {
+    //     //ToDo: reject it ?
+    //     return nil, fmt.Errorf("out of the bx time")
+    // }
     if _toid != toid {
         return nil, fmt.Errorf(" don't hvae the right to confirmbx!")
     }
