@@ -1,0 +1,22 @@
+version: '2'
+services:
+  baseimage:
+    build: ./baseimage
+    image: hyperledger/fabric-baseimage:latest
+    
+  vp4:
+    image: ibmblockchain/fabric-peer:${ARCH_TAG}
+    extends:
+      file: base/peer-secure-pbft-base.yaml
+      service: peer-secure-pbft-base
+    ports:
+      - "11050:7050"
+      - "11051:7051"
+      - "11053:7053"
+    environment:
+      - CORE_PEER_DISCOVERY_ROOTNODE=${vp0}:7051
+      - CORE_PEER_ID=vp1
+      - CORE_SECURITY_ENROLLID=test_vp4
+      - CORE_SECURITY_ENROLLSECRET=Pqh90CEW5juZ
+
+
