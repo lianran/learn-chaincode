@@ -284,7 +284,7 @@ func (t *myChaincode) createbx(stub shim.ChaincodeStubInterface, args []string) 
 
     //update each uuid
     for _, uuid := range listuuid {
-        val, err := t.submit(stub, uuid, owner, toid, timestamp, bxuuid)
+        _, err := t.submit(stub, uuid, owner, toid, timestamp, bxuuid)
         if err != nil{
             return shim.Error(err.Error())
         }
@@ -390,7 +390,7 @@ func (t *myChaincode) confirmbx(stub shim.ChaincodeStubInterface, args []string)
     //update each uuid
     listuuid := strings.Split(uuids, ",")
     for _, uuid := range listuuid {
-        val, err := t.confirm(stub, uuid, toid, timestamp)
+        _, err := t.confirm(stub, uuid, toid, timestamp)
         if err !=nil {
             return shim.Error(err.Error())
         }
@@ -452,7 +452,7 @@ func (t *myChaincode) confirm(stub shim.ChaincodeStubInterface, uuid string, _to
 }
 func (t *myChaincode) rejectbx(stub shim.ChaincodeStubInterface, args []string) pb.Response {
     if len(args) < 4 {
-        return nil, errors.New("reject operation must include at last four arguments, a uuid , a toid , a reason and  timestamp")
+        return shim.Error("reject operation must include at last four arguments, a uuid , a toid , a reason and  timestamp")
     }
     //get the args
     bxuuid := args[0]
@@ -490,7 +490,7 @@ func (t *myChaincode) rejectbx(stub shim.ChaincodeStubInterface, args []string) 
     //update each uuid
     listuuid := strings.Split(uuids, ",")
     for _, uuid := range listuuid {
-        val, err := t.reject(stub, uuid, toid, timestamp)
+        _, err := t.reject(stub, uuid, toid, timestamp)
         if err !=nil {
             return shim.Error(err.Error())
         }
@@ -630,14 +630,14 @@ func (t *myChaincode) getCountofInvoice(stub shim.ChaincodeStubInterface, args [
         tm, err = strconv.ParseInt(args[1], 10, 64)
     }
     if err != nil {
-        return shim.Error("getnumofbills failed. Bad format of the time: %s", err)
+        return shim.Error("getnumofbills failed. Bad format of the time: " + err.Error())
     }
     starttime := strconv.FormatInt(ts-tm, 10)
     endtime := strconv.FormatInt(ts,10)
 
     keysIter, err := stub.GetStateByRange(owner + sp + starttime, owner + sp + endtime)
     if err != nil {
-        return shim.Error("getnumofbills failed. Error accessing state: %s", err)
+        return shim.Error("getnumofbills failed. Error accessing state: " + err.Error())
     }
     defer keysIter.Close()
 
@@ -646,7 +646,7 @@ func (t *myChaincode) getCountofInvoice(stub shim.ChaincodeStubInterface, args [
     for keysIter.HasNext() {
         _, _, iterErr := keysIter.Next()
         if iterErr != nil {
-            return nil, fmt.Errorf("getnumofbills operation failed. Error accessing state: %s", err)
+            return shim.Error("getnumofbills operation failed. Error accessing state: " + err.Error())
         }
         cnt = cnt + 1
     }
@@ -664,7 +664,7 @@ func (t *myChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []string
     key := uuid
     value, err := stub.GetState(key)
     if err != nil {
-        return shim.Error("get operation failed. Error accessing state: %s", err)
+        return shim.Error("get operation failed. Error accessing state: " +  err.Error())
     }
     if value == nil {
         return shim.Success([]byte("don't have this bill"))
@@ -683,7 +683,7 @@ func (t *myChaincode) getInvoice(stub shim.ChaincodeStubInterface, args []string
         }
     }
     if flag || _owner == toid {
-        reuturn shim.Success(value)
+        return shim.Success(value)
     }
     return shim.Success([]byte("you don't have the right to get this bill"))
 }
@@ -718,7 +718,7 @@ func (t *myChaincode) getMetadata(stub shim.ChaincodeStubInterface, args []strin
         }
     }
     if flag != true && _owner == toid {
-        return shim.Error([]byte("you don't have the right to get the matedate of this bill"))
+        return shim.Error("you don't have the right to get the matedate of this bill")
     }
     //get the metadata
     key = uuid + sp + "md"
@@ -763,7 +763,7 @@ func (t *myChaincode)getReimburseInfo(stub shim.ChaincodeStubInterface, args []s
     ownerid := listValue[1]
     toid := listValue[2]
     if ownerid != _owner && toid != _owner {
-        return shim.Error([]byte("you don't have the right to get the reimbuseinfo"))
+        return shim.Error("you don't have the right to get the reimbuseinfo")
     }
     return shim.Success(value)
 }
@@ -789,7 +789,7 @@ func (t *myChaincode)getbx(stub shim.ChaincodeStubInterface, args []string) pb.R
     owner := listValue[1]
     toid := listValue[2]
     if _owner != owner && _owner != toid{
-        return shim.Error([]byte("you don't have the right to get this info"))
+        return shim.Error("you don't have the right to get this info")
     }
     return shim.Success(value)
 }
