@@ -599,11 +599,11 @@ func (t *myChaincode) myHistory(stub shim.ChaincodeStubInterface, args []string)
 
     var keys []string
     for keysIter.HasNext() {
-        key, iterErr := keysIter.Next()
+        keyV, iterErr := keysIter.Next()
         if iterErr != nil {
             return shim.Error("getnumofbills operation failed. Error accessing state: " + err.Error())
         }
-        keys = append(keys, key)
+        keys = append(keys, keyV.Key)
     }
     
     jsonKeys, err := json.Marshal(keys)
