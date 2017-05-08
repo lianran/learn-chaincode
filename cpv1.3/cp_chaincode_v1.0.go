@@ -599,7 +599,7 @@ func (t *myChaincode) myHistory(stub shim.ChaincodeStubInterface, args []string)
 
     var keys []string
     for keysIter.HasNext() {
-        key, _, iterErr := keysIter.Next()
+        key, iterErr := keysIter.Next()
         if iterErr != nil {
             return shim.Error("getnumofbills operation failed. Error accessing state: " + err.Error())
         }
@@ -644,7 +644,7 @@ func (t *myChaincode) getCountofInvoice(stub shim.ChaincodeStubInterface, args [
     cnt := int64(0)
 
     for keysIter.HasNext() {
-        _, _, iterErr := keysIter.Next()
+        _, iterErr := keysIter.Next()
         if iterErr != nil {
             return shim.Error("getnumofbills operation failed. Error accessing state: " + err.Error())
         }
